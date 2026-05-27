@@ -1,0 +1,127 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { Navbar } from '@/components/layout/Navbar'
+import { BookOpen, Eye, EyeOff, Loader2 } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
+import toast from 'react-hot-toast'
+
+export default function SignupPage() {
+  const router = useRouter()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters')
+      return
+    }
+    setLoading(true)
+
+    const supabase = createClient()
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { full_name: name },
+      },
+    })
+
+    if (error) {
+      toast.error(error.message)
+      setLoading(false)
+      return
+    }
+
+    toast.success('Account created! Please check your email to confirm.')
+    router.push('/login')
+  }
+
+  return (
+    <>
+      <Navbar />
+      <main className="pt-20 min-h-screen bg-[#F9FAFB] flex items-center justify-center px-6">
+        <div className="w-full max-w-[448px]">
+          <div className="text-center mb-8">
+            <div className="w-12 h-12 rounded-2xl bg-[#1E7B85] flex items-center justify-center mx-auto mb-4">
+              <BookOpen className="w-6 h-6 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
+            <p className="text-gray-500 text-sm mt-1">Join the knowledge community</p>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+            <form onSubmit={handleSignup} className="space-y-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="John Doe"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Min. 6 characters"
+                    required
+                    className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full flex items-center justify-center gap-2 py-3 bg-[#1E7B85] text-white font-semibold rounded-xl hover:bg-[#00616a] transition-all disabled:opacity-60 shadow-lg shadow-[#1E7B85]/20"
+              >
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+                {loading ? 'Creating account...' : 'Create Account'}
+              </button>
+            </form>
+
+            <p className="text-center text-sm text-gray-500 mt-6">
+              Already have an account?{' '}
+              <Link href="/login" className="text-[#1E7B85] font-semibold hover:underline">
+                Sign in
+              </Link>
+            </p>
+          </div>
+        </div>
+      </main>
+    </>
+  )
+}
