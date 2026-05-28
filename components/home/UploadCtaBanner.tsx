@@ -7,7 +7,7 @@ export function UploadCtaBanner() {
   return (
     <section className="py-12 bg-[#FAF9F7]">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#00484E] to-[#00616A] px-10 lg:px-16 py-16 flex flex-col lg:flex-row items-center gap-8">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0F2C59] to-[#1D4ED8] px-10 lg:px-16 py-16 flex flex-col lg:flex-row items-center gap-8">
           {/* Dot pattern */}
           <div
             className="absolute inset-0 opacity-[0.06]"
@@ -26,10 +26,10 @@ export function UploadCtaBanner() {
             >
               Share your knowledge
               <br />
-              <span className="text-[#A5EEF9]">with the world</span>
+              <span className="text-[#93C5FD]">with the world</span>
             </h2>
             <p
-              className="text-[#CBE8EC] text-base max-w-[420px] mx-auto lg:mx-0"
+              className="text-[#DBEAFE] text-base max-w-[420px] mx-auto lg:mx-0"
               style={{ fontFamily: 'var(--font-manrope)' }}
             >
               Upload documents, books, or research papers and reach millions of eager readers.
@@ -39,7 +39,7 @@ export function UploadCtaBanner() {
           <div className="relative flex flex-col sm:flex-row gap-3 shrink-0">
             <Link
               href="/upload"
-              className="flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-[#00484E] rounded-full text-sm font-bold hover:shadow-[0_8px_32px_rgba(255,255,255,0.2)] transition-all hover:-translate-y-0.5"
+              className="flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-[#0F2C59] rounded-full text-sm font-bold hover:shadow-[0_8px_32px_rgba(255,255,255,0.2)] transition-all hover:-translate-y-0.5"
               style={{ fontFamily: 'var(--font-manrope)' }}
             >
               <Upload className="w-4 h-4" />

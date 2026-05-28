@@ -20,7 +20,7 @@ export default function LoginPage() {
     setLoading(true)
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data: { session }, error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
       toast.error(error.message)
@@ -28,8 +28,19 @@ export default function LoginPage() {
       return
     }
 
+    // Fetch user profile to check role
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', session?.user?.id)
+      .single()
+
     toast.success('Welcome back!')
-    router.push('/dashboard')
+    if (profile?.role === 'admin') {
+      router.push('/admin')
+    } else {
+      router.push('/dashboard')
+    }
     router.refresh()
   }
 
@@ -40,9 +51,12 @@ export default function LoginPage() {
         <div className="w-full max-w-[448px]">
           {/* Logo */}
           <div className="text-center mb-8">
-            <div className="w-12 h-12 rounded-2xl bg-[#1E7B85] flex items-center justify-center mx-auto mb-4">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
+            <Link href="/" className="inline-flex items-center gap-2 mb-4 justify-center">
+              <img src="/karyasaarthi.png" alt="Karya Saarthi Logo" className="h-10 w-auto object-contain" />
+              <span className="font-display font-800 text-2xl text-[#0F2C59] tracking-tight" style={{ fontFamily: 'var(--font-epilogue)', fontWeight: 800, letterSpacing: '-0.04em' }}>
+                KSHub
+              </span>
+            </Link>
             <h1 className="text-2xl font-bold text-gray-900">Welcome back</h1>
             <p className="text-gray-500 text-sm mt-1">Sign in to your KSHub account</p>
           </div>
@@ -57,7 +71,7 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] transition-all"
                 />
               </div>
 
@@ -70,7 +84,7 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
                     required
-                    className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                    className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] transition-all"
                   />
                   <button
                     type="button"
@@ -85,7 +99,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-[#1E7B85] text-white font-semibold rounded-xl hover:bg-[#00616a] transition-all disabled:opacity-60 shadow-lg shadow-[#1E7B85]/20"
+                className="w-full flex items-center justify-center gap-2 py-3 bg-[#1D4ED8] text-white font-semibold rounded-xl hover:bg-[#0F2C59] transition-all disabled:opacity-60 shadow-lg shadow-[#1D4ED8]/20"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                 {loading ? 'Signing in...' : 'Sign In'}
@@ -94,7 +108,7 @@ export default function LoginPage() {
 
             <p className="text-center text-sm text-gray-500 mt-6">
               Don't have an account?{' '}
-              <Link href="/signup" className="text-[#1E7B85] font-semibold hover:underline">
+              <Link href="/signup" className="text-[#1D4ED8] font-semibold hover:underline">
                 Create one free
               </Link>
             </p>

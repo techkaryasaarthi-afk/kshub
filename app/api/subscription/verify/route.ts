@@ -4,7 +4,7 @@ import { verifyRazorpaySignature } from '@/lib/razorpay'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, user_id } = body
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, user_id, plan } = body
 
   if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !user_id) {
     return NextResponse.json({ error: 'Missing payment verification fields' }, { status: 400 })
@@ -25,9 +25,22 @@ export async function POST(req: NextRequest) {
     .eq('user_id', user_id)
     .eq('status', 'active')
 
-  // Calculate end date (30 days from now)
-  const endDate = new Date()
-  endDate.setDate(endDate.getDate() + 30)
+  // Calculate end date based on plan
+  let endDate = null
+  if (plan === 'annual') {
+    const d = new Date()
+    d.setDate(d.getDate() + 365)
+    endDate = d.toISOString()
+  } else if (plan === 'single') {
+    const d = new Date()
+    d.setFullYear(d.getFullYear() + 99) // 99 years for lifetime access
+    endDate = d.toISOString()
+  } else {
+    // Default to monthly (30 days)
+    const d = new Date()
+    d.setDate(d.getDate() + 30)
+    endDate = d.toISOString()
+  }
 
   // Create new premium subscription
   const { data, error } = await supabase
@@ -39,7 +52,7 @@ export async function POST(req: NextRequest) {
       razorpay_order_id,
       razorpay_payment_id,
       start_date: new Date().toISOString(),
-      end_date: endDate.toISOString(),
+      end_date: endDate,
     })
     .select()
     .single()

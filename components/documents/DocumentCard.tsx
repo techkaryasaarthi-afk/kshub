@@ -8,11 +8,11 @@ import type { Document } from '@/types'
 export function DocumentCard({ document }: { document: Document }) {
   const categoryColors: Record<string, string> = {
     academic: 'bg-blue-50 text-blue-700',
-    professional: 'bg-[#00616A]/10 text-[#00484E]',
+    professional: 'bg-[#1D4ED8]/10 text-[#0F2C59]',
     culture: 'bg-purple-50 text-purple-700',
     technology: 'bg-sky-50 text-sky-700',
     science: 'bg-emerald-50 text-emerald-700',
-    default: 'bg-[#CBE8EC] text-[#3F484A]',
+    default: 'bg-[#DBEAFE] text-[#0F2C59]',
   }
 
   const catColor = categoryColors[document.categories?.slug || 'default'] || categoryColors.default
@@ -28,7 +28,7 @@ export function DocumentCard({ document }: { document: Document }) {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#00484E] to-[#00616A]">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#0F2C59] to-[#1D4ED8]">
             <div className="text-4xl mb-2 opacity-50">📄</div>
             <div className="h-1.5 bg-white/20 rounded w-3/4 mb-1.5" />
             <div className="h-1.5 bg-white/15 rounded w-1/2 mb-1.5" />
@@ -54,7 +54,7 @@ export function DocumentCard({ document }: { document: Document }) {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="text-sm font-semibold text-[#1A1C1B] line-clamp-2 mb-2 leading-snug group-hover:text-[#00616A] transition-colors" style={{ fontFamily: 'var(--font-manrope)' }}>
+        <h3 className="text-sm font-semibold text-[#1A1C1B] line-clamp-2 mb-2 leading-snug group-hover:text-[#1D4ED8] transition-colors" style={{ fontFamily: 'var(--font-manrope)' }}>
           {document.title}
         </h3>
 

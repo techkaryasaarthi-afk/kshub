@@ -11,15 +11,19 @@ function getRazorpay() {
   })
 }
 
-export async function createSubscriptionOrder(userId: string) {
+export async function createSubscriptionOrder(userId: string, plan: string) {
   const rzp = getRazorpay()
+  let amount = 49900 // Default: monthly pass
+  if (plan === 'single') amount = 9900
+  else if (plan === 'annual') amount = 399900
+
   const order = await rzp.orders.create({
-    amount: PREMIUM_PRICE_INR_PAISE,
+    amount,
     currency: 'INR',
     receipt: `sub_${userId}_${Date.now()}`,
     notes: {
       userId,
-      plan: 'premium',
+      plan,
     },
   })
   return order

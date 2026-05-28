@@ -1,29 +1,79 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { CATEGORIES } from '@/lib/utils'
 
 export function CategoriesSection() {
+  const [categories, setCategories] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/categories')
+      .then((res) => res.json())
+      .then((res) => {
+        setCategories(res.data || [])
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error(err)
+        setLoading(false)
+      })
+  }, [])
+
   return (
-    <section className="py-16 px-6 bg-white">
+    <section className="py-12 px-6 bg-white" id="categories">
       <div className="max-w-[1280px] mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse by Category</h2>
-          <p className="text-gray-500 text-sm">Find documents in your area of interest</p>
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#1D4ED8]/10 rounded-full text-xs font-semibold text-[#1D4ED8] mb-3 uppercase tracking-wider">
+            ✦ Content Library
+          </div>
+          <h2
+            className="text-3xl lg:text-4xl font-extrabold text-[#1A1C1B] mb-3"
+            style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}
+          >
+            12 Categories. One Library.
+          </h2>
+          <p
+            className="text-sm text-[#475569] max-w-[620px] mx-auto leading-relaxed"
+            style={{ fontFamily: 'var(--font-manrope)' }}
+          >
+            MBA reports, dissertation papers, textbooks, and case studies — digitally organised and instantly accessible.
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {CATEGORIES.map((cat) => (
-            <Link
-              key={cat.id}
-              href={`/search?category=${cat.slug}`}
-              className="flex flex-col items-center gap-3 p-5 bg-[#F9FAFB] rounded-2xl hover:bg-[#1E7B85]/5 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group"
-            >
-              <span className="text-3xl">{cat.icon}</span>
-              <span className="text-sm font-semibold text-gray-700 group-hover:text-[#1E7B85] transition-colors text-center">
-                {cat.name}
-              </span>
-            </Link>
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="h-16 bg-[#F4F3F1] rounded-xl animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {categories.map((cat) => (
+              <Link
+                key={cat.id}
+                href={`/search?category=${cat.slug}`}
+                className="flex items-center gap-3 p-3 bg-[#FAF9F7] border border-gray-200/50 rounded-xl hover:border-[#1D4ED8]/30 hover:bg-[#1D4ED8]/5 hover:shadow-md transition-all min-w-0"
+              >
+                <span className="text-2xl shrink-0">{cat.icon || '📄'}</span>
+                <div className="min-w-0 flex-1">
+                  <span
+                    className="block text-xs font-bold text-gray-800 truncate leading-tight mb-0.5"
+                    style={{ fontFamily: 'var(--font-manrope)' }}
+                  >
+                    {cat.name}
+                  </span>
+                  <span 
+                    className="block text-[10px] text-gray-400 font-medium"
+                    style={{ fontFamily: 'var(--font-manrope)' }}
+                  >
+                    {cat.countText || '0 docs'}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

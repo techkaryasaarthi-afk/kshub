@@ -3,11 +3,11 @@
 /* ===== Design System: Bibliothèque Modern ===== */
 @theme {
   /* Colors */
-  --color-primary: #00484E;
-  --color-primary-container: #00616A;
+  --color-primary: #0F2C59;
+  --color-primary-container: #1D4ED8;
   --color-on-primary: #FFFFFF;
-  --color-secondary: #496366;
-  --color-secondary-container: #CBE8EC;
+  --color-secondary: #475569;
+  --color-secondary-container: #DBEAFE;
   --color-surface: #FAF9F7;
   --color-surface-low: #F4F3F1;
   --color-surface-container: #EFEEEC;
@@ -149,7 +149,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: linear-gradient(135deg, #00484E 0%, #00616A 100%);
+  background: linear-gradient(135deg, #0F2C59 0%, #1D4ED8 100%);
   color: #FFFFFF;
   font-family: var(--font-body);
   font-weight: 600;
@@ -162,8 +162,8 @@
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #00616A 0%, #00838F 100%);
-  box-shadow: 0 8px 24px rgba(0, 97, 106, 0.25);
+  background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.25);
   transform: translateY(-1px);
 }
 
@@ -185,9 +185,9 @@
 }
 
 .btn-secondary:hover {
-  border-color: #00616A;
-  color: #00616A;
-  background: rgba(0, 97, 106, 0.04);
+  border-color: #1D4ED8;
+  color: #1D4ED8;
+  background: rgba(29, 78, 216, 0.04);
 }
 
 /* ===== Cards ===== */

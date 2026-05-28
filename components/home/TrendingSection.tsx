@@ -11,7 +11,7 @@ export function TrendingSection({ documents }: { documents: Document[] }) {
         <div className="flex items-end justify-between mb-10">
           <div>
             <p
-              className="label-lg text-[#00616A] mb-2"
+              className="label-lg text-[#1D4ED8] mb-2"
             >
               Discover
             </p>
@@ -24,7 +24,7 @@ export function TrendingSection({ documents }: { documents: Document[] }) {
           </div>
           <Link
             href="/search?sort=views"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#00616A] hover:gap-2.5 transition-all"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#1D4ED8] hover:gap-2.5 transition-all"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all <ArrowRight className="w-4 h-4" />
@@ -50,7 +50,7 @@ export function TrendingSection({ documents }: { documents: Document[] }) {
         <div className="mt-8 flex justify-center sm:hidden">
           <Link
             href="/search?sort=views"
-            className="flex items-center gap-1.5 text-sm font-semibold text-[#00616A]"
+            className="flex items-center gap-1.5 text-sm font-semibold text-[#1D4ED8]"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all trending <ArrowRight className="w-4 h-4" />

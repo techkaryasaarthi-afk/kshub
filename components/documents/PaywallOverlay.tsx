@@ -18,16 +18,16 @@ export function PaywallOverlay({ documentId }: PaywallOverlayProps) {
         Premium Content
       </h3>
       <p className="text-gray-500 text-sm mb-6 leading-relaxed">
-        You've reached the free preview limit. Subscribe to Premium for unlimited access to all documents.
+        You've reached the free preview limit. Buy this document or subscribe to a pass for unlimited access.
       </p>
 
       <div className="space-y-3">
         <Link
           href="/subscription"
-          className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-[#1E7B85] to-[#00616a] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-[#1E7B85]/30 transition-all"
+          className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-[#3B82F6] to-[#1D4ED8] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-[#3B82F6]/30 transition-all"
         >
           <Crown className="w-4 h-4 text-amber-300" />
-          Upgrade to Premium — ₹199/mo
+          Get Access — From ₹99
         </Link>
 
         <p className="text-xs text-gray-400">

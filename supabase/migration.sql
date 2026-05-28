@@ -228,14 +228,16 @@ CREATE POLICY "Service role can manage subscriptions" ON public.subscriptions
 -- ============================================================
 
 INSERT INTO public.categories (name, slug, icon) VALUES
-  ('Business', 'business', '💼'),
-  ('Technology', 'technology', '💻'),
-  ('Education', 'education', '📚'),
-  ('Science', 'science', '🔬'),
-  ('Arts & Design', 'arts-design', '🎨'),
-  ('Health', 'health', '❤️'),
-  ('Finance', 'finance', '💰'),
-  ('Law', 'law', '⚖️'),
-  ('History', 'history', '🏛️'),
-  ('Self Help', 'self-help', '✨')
+  ('Research Papers', 'research-papers', '📄'),
+  ('SIP Reports', 'sip-reports', '📊'),
+  ('Textbooks', 'textbooks', '📚'),
+  ('Thesis & Dissertations', 'thesis-dissertations', '🎓'),
+  ('Case Studies', 'case-studies', '📖'),
+  ('Stories & Fiction', 'stories-fiction', '✍️'),
+  ('Business Plans', 'business-plans', '📈'),
+  ('Technical Docs', 'technical-docs', '🔬'),
+  ('International Resources', 'international-resources', '🌍'),
+  ('Exam Prep', 'exam-prep', '🎯'),
+  ('Professional Guides', 'professional-guides', '💼'),
+  ('Creative Works', 'creative-works', '🎨')
 ON CONFLICT (slug) DO NOTHING;

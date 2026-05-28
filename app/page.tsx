@@ -3,11 +3,12 @@ export const dynamic = 'force-dynamic'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { HeroSection } from '@/components/home/HeroSection'
-import { CategoryNav } from '@/components/home/CategoryNav'
+import { CategoriesSection } from '@/components/home/CategoriesSection'
 import { TrendingSection } from '@/components/home/TrendingSection'
 import { UploadCtaBanner } from '@/components/home/UploadCtaBanner'
 import { PricingSection } from '@/components/home/PricingSection'
 import { FeaturedSection } from '@/components/home/FeaturedSection'
+import { FaqSection } from '@/components/home/FaqSection'
 import { createClient } from '@/lib/supabase/server'
 import type { Document } from '@/types'
 
@@ -33,11 +34,12 @@ export default async function HomePage() {
       <Navbar />
       <main>
         <HeroSection />
-        <CategoryNav />
+        <CategoriesSection />
         <TrendingSection documents={(trendingDocs as Document[]) || []} />
         <UploadCtaBanner />
         <PricingSection />
         <FeaturedSection documents={(recentDocs as Document[]) || []} />
+        <FaqSection />
       </main>
       <Footer />
     </>

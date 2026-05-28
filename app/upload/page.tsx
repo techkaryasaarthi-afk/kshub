@@ -1,25 +1,33 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { useDropzone } from 'react-dropzone'
 import { Upload, X, FileText, Loader2, CloudUpload, Lock, ShieldCheck } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { CATEGORIES, validatePdfFile } from '@/lib/utils'
+import { validatePdfFile } from '@/lib/utils'
 
 export default function UploadPage() {
   const router = useRouter()
   const [file, setFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
+  const [categories, setCategories] = useState<any[]>([])
   const [form, setForm] = useState({
     title: '',
     description: '',
     category_id: '',
     is_premium: false,
   })
+
+  useEffect(() => {
+    fetch('/api/categories')
+      .then((res) => res.json())
+      .then((res) => setCategories(res.data || []))
+      .catch((err) => console.error('Failed to load categories:', err))
+  }, [])
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const f = acceptedFiles[0]
@@ -128,13 +136,13 @@ export default function UploadPage() {
                 {...getRootProps()}
                 className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
                   isDragActive
-                    ? 'border-[#1E7B85] bg-[#1E7B85]/5'
-                    : 'border-gray-200 bg-white hover:border-[#1E7B85]/50 hover:bg-[#1E7B85]/2'
+                    ? 'border-[#1D4ED8] bg-[#1D4ED8]/5'
+                    : 'border-gray-200 bg-white hover:border-[#1D4ED8]/50 hover:bg-[#1D4ED8]/2'
                 }`}
               >
                 <input {...getInputProps()} />
-                <div className="w-16 h-16 bg-[#1E7B85]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <CloudUpload className="w-8 h-8 text-[#1E7B85]" />
+                <div className="w-16 h-16 bg-[#1D4ED8]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <CloudUpload className="w-8 h-8 text-[#1D4ED8]" />
                 </div>
                 <p className="text-lg font-semibold text-gray-700 mb-1">
                   {isDragActive ? 'Drop your PDF here' : 'Drag & drop your PDF here'}
@@ -142,7 +150,7 @@ export default function UploadPage() {
                 <p className="text-sm text-gray-400 mb-4">or</p>
                 <button
                   type="button"
-                  className="px-6 py-2.5 bg-[#1E7B85] text-white font-medium rounded-xl hover:bg-[#00616a] transition-colors text-sm"
+                  className="px-6 py-2.5 bg-[#1D4ED8] text-white font-medium rounded-xl hover:bg-[#0F2C59] transition-colors text-sm"
                 >
                   Browse Files
                 </button>
@@ -159,7 +167,7 @@ export default function UploadPage() {
                   {uploading && (
                     <div className="mt-2 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-[#1E7B85] rounded-full transition-all duration-500"
+                        className="h-full bg-[#1D4ED8] rounded-full transition-all duration-500"
                         style={{ width: `${uploadProgress}%` }}
                       />
                     </div>
@@ -189,7 +197,7 @@ export default function UploadPage() {
                   onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
                   placeholder="Enter document title"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] transition-all"
                 />
               </div>
 
@@ -200,7 +208,7 @@ export default function UploadPage() {
                   onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                   placeholder="What is this document about?"
                   rows={3}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 resize-none"
                 />
               </div>
 
@@ -209,12 +217,12 @@ export default function UploadPage() {
                 <select
                   value={form.category_id}
                   onChange={(e) => setForm((f) => ({ ...f, category_id: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 bg-white"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 bg-white"
                 >
                   <option value="">Select a category</option>
-                  {CATEGORIES.map((cat) => (
+                  {categories.map((cat) => (
                     <option key={cat.id} value={cat.id}>
-                      {cat.icon} {cat.name}
+                      {cat.icon || '📄'} {cat.name}
                     </option>
                   ))}
                 </select>
@@ -251,7 +259,7 @@ export default function UploadPage() {
               <button
                 type="submit"
                 disabled={uploading || !file}
-                className="w-full flex items-center justify-center gap-3 py-3.5 bg-[#1E7B85] text-white font-semibold rounded-xl hover:bg-[#00616a] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#1E7B85]/20"
+                className="w-full flex items-center justify-center gap-3 py-3.5 bg-[#1D4ED8] text-white font-semibold rounded-xl hover:bg-[#0F2C59] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#1D4ED8]/20"
               >
                 {uploading ? (
                   <>

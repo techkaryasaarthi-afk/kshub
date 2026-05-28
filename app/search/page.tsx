@@ -7,7 +7,6 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { DocumentCard, DocumentCardSkeleton } from '@/components/documents/DocumentCard'
 import { Grid, List, SlidersHorizontal } from 'lucide-react'
-import { CATEGORIES } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import type { Document } from '@/types'
 
@@ -18,6 +17,7 @@ function SearchContent() {
   const sortParam = searchParams.get('sort') || 'newest'
 
   const [documents, setDocuments] = useState<Document[]>([])
+  const [categories, setCategories] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [total, setTotal] = useState(0)
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
@@ -25,6 +25,13 @@ function SearchContent() {
   const [premiumFilter, setPremiumFilter] = useState<'all' | 'free' | 'premium'>('all')
   const [sort, setSort] = useState(sortParam)
   const [page] = useState(1)
+
+  useEffect(() => {
+    fetch('/api/categories')
+      .then((res) => res.json())
+      .then((res) => setCategories(res.data || []))
+      .catch((err) => console.error(err))
+  }, [])
 
   const fetchDocuments = useCallback(async () => {
     setLoading(true)
@@ -56,7 +63,7 @@ function SearchContent() {
         <div className="max-w-[1280px] mx-auto px-6 py-8">
           {q && (
             <h1 className="text-2xl font-bold text-gray-900 mb-6">
-              Results for <span className="text-[#1E7B85]">"{q}"</span>
+              Results for <span className="text-[#1D4ED8]">"{q}"</span>
               <span className="text-base font-normal text-gray-500 ml-2">({total} documents)</span>
             </h1>
           )}
@@ -78,23 +85,23 @@ function SearchContent() {
                       onClick={() => setSelectedCategory('')}
                       className={cn(
                         'w-full text-left px-3 py-2 rounded-xl text-sm transition-colors',
-                        !selectedCategory ? 'bg-[#1E7B85]/10 text-[#1E7B85] font-medium' : 'text-gray-600 hover:bg-gray-50'
+                        !selectedCategory ? 'bg-[#1D4ED8]/10 text-[#1D4ED8] font-medium' : 'text-gray-600 hover:bg-gray-50'
                       )}
                     >
                       All Categories
                     </button>
-                    {CATEGORIES.map((cat) => (
+                    {categories.map((cat) => (
                       <button
                         key={cat.id}
                         onClick={() => setSelectedCategory(cat.slug)}
                         className={cn(
                           'w-full text-left px-3 py-2 rounded-xl text-sm transition-colors flex items-center gap-2',
                           selectedCategory === cat.slug
-                            ? 'bg-[#1E7B85]/10 text-[#1E7B85] font-medium'
+                            ? 'bg-[#1D4ED8]/10 text-[#1D4ED8] font-medium'
                             : 'text-gray-600 hover:bg-gray-50'
                         )}
                       >
-                        <span>{cat.icon}</span> {cat.name}
+                        <span>{cat.icon || '📄'}</span> {cat.name}
                       </button>
                     ))}
                   </div>
@@ -111,7 +118,7 @@ function SearchContent() {
                         className={cn(
                           'w-full text-left px-3 py-2 rounded-xl text-sm transition-colors capitalize',
                           premiumFilter === type
-                            ? 'bg-[#1E7B85]/10 text-[#1E7B85] font-medium'
+                            ? 'bg-[#1D4ED8]/10 text-[#1D4ED8] font-medium'
                             : 'text-gray-600 hover:bg-gray-50'
                         )}
                       >
@@ -130,7 +137,7 @@ function SearchContent() {
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="text-sm border border-gray-200 rounded-xl px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30"
+                  className="text-sm border border-gray-200 rounded-xl px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30"
                 >
                   <option value="newest">Newest first</option>
                   <option value="views">Most viewed</option>
@@ -140,13 +147,13 @@ function SearchContent() {
                 <div className="flex items-center gap-1 bg-white rounded-xl border border-gray-200 p-1">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={cn('p-2 rounded-lg transition-colors', viewMode === 'grid' ? 'bg-[#1E7B85] text-white' : 'text-gray-400 hover:text-gray-600')}
+                    className={cn('p-2 rounded-lg transition-colors', viewMode === 'grid' ? 'bg-[#1D4ED8] text-white' : 'text-gray-400 hover:text-gray-600')}
                   >
                     <Grid className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={cn('p-2 rounded-lg transition-colors', viewMode === 'list' ? 'bg-[#1E7B85] text-white' : 'text-gray-400 hover:text-gray-600')}
+                    className={cn('p-2 rounded-lg transition-colors', viewMode === 'list' ? 'bg-[#1D4ED8] text-white' : 'text-gray-400 hover:text-gray-600')}
                   >
                     <List className="w-4 h-4" />
                   </button>

@@ -49,9 +49,12 @@ export default function SignupPage() {
       <main className="pt-20 min-h-screen bg-[#F9FAFB] flex items-center justify-center px-6">
         <div className="w-full max-w-[448px]">
           <div className="text-center mb-8">
-            <div className="w-12 h-12 rounded-2xl bg-[#1E7B85] flex items-center justify-center mx-auto mb-4">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
+            <Link href="/" className="inline-flex items-center gap-2 mb-4 justify-center">
+              <img src="/karyasaarthi.png" alt="Karya Saarthi Logo" className="h-10 w-auto object-contain" />
+              <span className="font-display font-800 text-2xl text-[#0F2C59] tracking-tight" style={{ fontFamily: 'var(--font-epilogue)', fontWeight: 800, letterSpacing: '-0.04em' }}>
+                KSHub
+              </span>
+            </Link>
             <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
             <p className="text-gray-500 text-sm mt-1">Join the knowledge community</p>
           </div>
@@ -66,7 +69,7 @@ export default function SignupPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] transition-all"
                 />
               </div>
 
@@ -78,7 +81,7 @@ export default function SignupPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] transition-all"
                 />
               </div>
 
@@ -91,7 +94,7 @@ export default function SignupPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Min. 6 characters"
                     required
-                    className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30 focus:border-[#1E7B85] transition-all"
+                    className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 focus:border-[#1D4ED8] transition-all"
                   />
                   <button
                     type="button"
@@ -106,7 +109,7 @@ export default function SignupPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-[#1E7B85] text-white font-semibold rounded-xl hover:bg-[#00616a] transition-all disabled:opacity-60 shadow-lg shadow-[#1E7B85]/20"
+                className="w-full flex items-center justify-center gap-2 py-3 bg-[#1D4ED8] text-white font-semibold rounded-xl hover:bg-[#0F2C59] transition-all disabled:opacity-60 shadow-lg shadow-[#1D4ED8]/20"
               >
                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                 {loading ? 'Creating account...' : 'Create Account'}
@@ -115,7 +118,7 @@ export default function SignupPage() {
 
             <p className="text-center text-sm text-gray-500 mt-6">
               Already have an account?{' '}
-              <Link href="/login" className="text-[#1E7B85] font-semibold hover:underline">
+              <Link href="/login" className="text-[#1D4ED8] font-semibold hover:underline">
                 Sign in
               </Link>
             </p>

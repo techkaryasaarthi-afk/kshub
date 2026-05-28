@@ -48,7 +48,7 @@ export function Footer() {
                 <a
                   key={s}
                   href="#"
-                  className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-sm font-bold text-[#BEC8CA] hover:bg-[#00616A] hover:text-white transition-all"
+                  className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-sm font-bold text-[#BEC8CA] hover:bg-[#1D4ED8] hover:text-white transition-all"
                 >
                   {s}
                 </a>
@@ -87,7 +87,7 @@ export function Footer() {
               <p>
                 <strong>Registered Company:</strong> Karyanex Private Limited<br />
                 <strong>Trade Name:</strong> Karya Saarthi<br />
-                <strong>Main Website:</strong> <a href="https://karyasaarthi.com" target="_blank" rel="noopener noreferrer" className="text-[#00616A] hover:underline">karyasaarthi.com</a>
+                <strong>Main Website:</strong> <a href="https://karyasaarthi.com" target="_blank" rel="noopener noreferrer" className="text-[#1D4ED8] hover:underline">karyasaarthi.com</a>
               </p>
             </div>
             

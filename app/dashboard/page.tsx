@@ -10,6 +10,7 @@ import { useAuthStore } from '@/store/authStore'
 import { createClient } from '@/lib/supabase/client'
 import { FileText, Eye, Heart, Bookmark, Crown, BarChart3, Upload, LayoutDashboard, User } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { cn, formatViews } from '@/lib/utils'
 import type { Document } from '@/types'
 
@@ -17,6 +18,7 @@ type TabType = 'documents' | 'bookmarks' | 'liked'
 
 export default function DashboardPage() {
   const { profile, isPremium, subscription } = useAuthStore()
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabType>('documents')
   const [documents, setDocuments] = useState<Document[]>([])
   const [bookmarks, setBookmarks] = useState<Document[]>([])
@@ -24,8 +26,16 @@ export default function DashboardPage() {
   const [stats, setStats] = useState({ docs: 0, views: 0, likes: 0, bookmarks: 0 })
   const [loading, setLoading] = useState(true)
 
+  // Redirect admin users to the admin page
+  useEffect(() => {
+    if (profile && profile.role === 'admin') {
+      router.push('/admin')
+    }
+  }, [profile, router])
+
   useEffect(() => {
     if (!profile) return
+    if (profile.role === 'admin') return // don't fetch if redirecting
 
     const supabase = createClient()
 
@@ -68,7 +78,7 @@ export default function DashboardPage() {
   }, [profile])
 
   const statsCards = [
-    { icon: FileText, label: 'My Documents', value: stats.docs, color: 'text-[#1E7B85]', bg: 'bg-[#1E7B85]/10' },
+    { icon: FileText, label: 'My Documents', value: stats.docs, color: 'text-[#1D4ED8]', bg: 'bg-[#1D4ED8]/10' },
     { icon: Eye, label: 'Total Views', value: formatViews(stats.views), color: 'text-blue-600', bg: 'bg-blue-50' },
     { icon: Heart, label: 'Liked', value: stats.likes, color: 'text-red-500', bg: 'bg-red-50' },
     { icon: Bookmark, label: 'Bookmarks', value: stats.bookmarks, color: 'text-amber-600', bg: 'bg-amber-50' },
@@ -93,7 +103,7 @@ export default function DashboardPage() {
               <div className="bg-white rounded-2xl border border-gray-100 p-6 sticky top-24">
                 {/* User */}
                 <div className="text-center mb-6 pb-6 border-b border-gray-100">
-                  <div className="w-16 h-16 rounded-2xl bg-[#1E7B85] flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
+                  <div className="w-16 h-16 rounded-2xl bg-[#1D4ED8] flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
                     {profile?.full_name?.[0]?.toUpperCase() || 'U'}
                   </div>
                   <p className="font-bold text-gray-900">{profile?.full_name || 'User'}</p>
@@ -182,7 +192,7 @@ export default function DashboardPage() {
                   <p className="text-4xl mb-3">📂</p>
                   <p className="font-semibold text-gray-900">No {activeTab} yet</p>
                   {activeTab === 'documents' && (
-                    <Link href="/upload" className="mt-3 inline-block text-sm text-[#1E7B85] hover:underline">
+                    <Link href="/upload" className="mt-3 inline-block text-sm text-[#1D4ED8] hover:underline">
                       Upload your first document →
                     </Link>
                   )}

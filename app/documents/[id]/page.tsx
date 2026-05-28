@@ -129,7 +129,7 @@ export default function DocumentPage() {
           <div className="text-center">
             <p className="text-6xl mb-4">📄</p>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Document not found</h2>
-            <Link href="/" className="text-[#1E7B85] hover:underline">Go home</Link>
+            <Link href="/" className="text-[#1D4ED8] hover:underline">Go home</Link>
           </div>
         </div>
       </>
@@ -156,13 +156,13 @@ export default function DocumentPage() {
               {/* Comments */}
               <div className="mt-8 bg-white rounded-2xl border border-gray-100 p-6">
                 <h3 className="font-bold text-gray-900 text-lg mb-5 flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-[#1E7B85]" />
+                  <MessageSquare className="w-5 h-5 text-[#1D4ED8]" />
                   Comments ({comments.length})
                 </h3>
 
                 {profile ? (
                   <form onSubmit={postComment} className="flex gap-3 mb-6">
-                    <div className="w-8 h-8 rounded-full bg-[#1E7B85] flex items-center justify-center text-white text-sm font-semibold shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-[#1D4ED8] flex items-center justify-center text-white text-sm font-semibold shrink-0">
                       {profile.full_name?.[0]?.toUpperCase() || 'U'}
                     </div>
                     <div className="flex-1 relative">
@@ -171,12 +171,12 @@ export default function DocumentPage() {
                         value={commentText}
                         onChange={(e) => setCommentText(e.target.value)}
                         placeholder="Add a comment..."
-                        className="w-full pr-10 pl-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E7B85]/30"
+                        className="w-full pr-10 pl-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30"
                       />
                       <button
                         type="submit"
                         disabled={!commentText.trim()}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-[#1E7B85] hover:bg-[#1E7B85]/10 rounded-lg disabled:opacity-30"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-[#1D4ED8] hover:bg-[#1D4ED8]/10 rounded-lg disabled:opacity-30"
                       >
                         <Send className="w-4 h-4" />
                       </button>
@@ -184,7 +184,7 @@ export default function DocumentPage() {
                   </form>
                 ) : (
                   <p className="text-sm text-gray-500 mb-6">
-                    <Link href="/login" className="text-[#1E7B85] hover:underline">Sign in</Link> to leave a comment.
+                    <Link href="/login" className="text-[#1D4ED8] hover:underline">Sign in</Link> to leave a comment.
                   </p>
                 )}
 
@@ -232,14 +232,14 @@ export default function DocumentPage() {
                 </h1>
 
                 {document.categories && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#1E7B85]/10 text-[#1E7B85] rounded-lg text-xs font-medium mb-4">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#1D4ED8]/10 text-[#1D4ED8] rounded-lg text-xs font-medium mb-4">
                     {document.categories.icon} {document.categories.name}
                   </span>
                 )}
 
                 {document.profiles && (
                   <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
-                    <div className="w-10 h-10 rounded-full bg-[#1E7B85] flex items-center justify-center text-white font-semibold">
+                    <div className="w-10 h-10 rounded-full bg-[#1D4ED8] flex items-center justify-center text-white font-semibold">
                       {document.profiles.full_name?.[0]?.toUpperCase() || 'U'}
                     </div>
                     <div>
@@ -279,18 +279,18 @@ export default function DocumentPage() {
                   <button
                     onClick={toggleBookmark}
                     className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border transition-all text-sm font-medium ${bookmarked
-                        ? 'bg-[#1E7B85]/10 border-[#1E7B85]/30 text-[#1E7B85]'
+                        ? 'bg-[#1D4ED8]/10 border-[#1D4ED8]/30 text-[#1D4ED8]'
                         : 'border-gray-200 text-gray-700 hover:bg-gray-50'
                       }`}
                   >
-                    <Bookmark className={`w-4 h-4 ${bookmarked ? 'fill-[#1E7B85] text-[#1E7B85]' : ''}`} />
+                    <Bookmark className={`w-4 h-4 ${bookmarked ? 'fill-[#1D4ED8] text-[#1D4ED8]' : ''}`} />
                     {bookmarked ? 'Bookmarked' : 'Bookmark'}
                   </button>
 
                   <button
                     onClick={handleDownload}
                     className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium transition-all ${canAccessFull
-                        ? 'bg-[#1E7B85] text-white hover:bg-[#00616a]'
+                        ? 'bg-[#1D4ED8] text-white hover:bg-[#0F2C59]'
                         : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                       }`}
                   >
@@ -302,7 +302,7 @@ export default function DocumentPage() {
                 {!canAccessFull && (
                   <Link
                     href="/subscription"
-                    className="block mt-3 text-center text-xs text-[#1E7B85] hover:underline"
+                    className="block mt-3 text-center text-xs text-[#1D4ED8] hover:underline"
                   >
                     Upgrade to Premium →
                   </Link>

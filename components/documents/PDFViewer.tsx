@@ -151,7 +151,7 @@ export function PDFViewer({ fileUrl, isPremium, userHasPremium, documentId }: PD
         {loading ? (
           <div className="flex items-center justify-center h-96">
             <div className="flex flex-col items-center gap-3">
-              <div className="w-8 h-8 border-2 border-[#1E7B85] border-t-transparent rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-[#1D4ED8] border-t-transparent rounded-full animate-spin" />
               <p className="text-sm text-gray-500">Loading document…</p>
             </div>
           </div>

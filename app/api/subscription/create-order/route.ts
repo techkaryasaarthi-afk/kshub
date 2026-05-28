@@ -9,7 +9,9 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   try {
-    const order = await createSubscriptionOrder(user.id)
+    const body = await req.json().catch(() => ({}))
+    const plan = body.plan || 'monthly'
+    const order = await createSubscriptionOrder(user.id, plan)
     return NextResponse.json({ order })
   } catch (err: any) {
     console.error('Razorpay order error:', err)

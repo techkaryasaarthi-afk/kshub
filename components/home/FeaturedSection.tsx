@@ -12,7 +12,7 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
         {/* Section header */}
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="label-lg text-[#00616A] mb-2">Community</p>
+            <p className="label-lg text-[#1D4ED8] mb-2">Community</p>
             <h2
               className="text-3xl lg:text-4xl font-bold text-[#1A1C1B]"
               style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.03em' }}
@@ -22,7 +22,7 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
           </div>
           <Link
             href="/search?sort=newest"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#00616A] hover:gap-2.5 transition-all"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#1D4ED8] hover:gap-2.5 transition-all"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all <ArrowRight className="w-4 h-4" />
@@ -39,7 +39,7 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
         <div className="mt-8 flex justify-center sm:hidden">
           <Link
             href="/search?sort=newest"
-            className="flex items-center gap-1.5 text-sm font-semibold text-[#00616A]"
+            className="flex items-center gap-1.5 text-sm font-semibold text-[#1D4ED8]"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all recent <ArrowRight className="w-4 h-4" />
