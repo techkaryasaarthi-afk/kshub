@@ -17,11 +17,11 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: 'KSHub — Read Anything. Learn Everything.',
+  title: "KSHub — The World's Most Affordable Digital Library",
   description: 'Unlimited access to millions of documents, books, audiobooks, and research papers. Upload, share, and discover knowledge with the world.',
   keywords: ['documents', 'PDF', 'books', 'research', 'knowledge', 'audiobooks', 'kshub', 'docs'],
   openGraph: {
-    title: 'KSHub — Read Anything. Learn Everything.',
+    title: "KSHub — The World's Most Affordable Digital Library",
     description: 'Unlimited access to millions of documents, books, and research papers.',
     type: 'website',
   },
