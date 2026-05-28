@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate
-    if (file.type !== 'application/pdf') {
+    if (file.type !== 'application/pdf' || !file.name.toLowerCase().endsWith('.pdf')) {
       return NextResponse.json({ error: 'Only PDF files are allowed' }, { status: 400 })
     }
     if (file.size > 50 * 1024 * 1024) {

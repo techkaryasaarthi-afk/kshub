@@ -75,12 +75,37 @@ export default function DocumentPage() {
     }
   }
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!isPremium && document?.is_premium) {
       toast.error('Premium subscription required to download')
       return
     }
-    window.open(document?.file_url, '_blank')
+
+    const toastId = toast.loading('Preparing secure download...')
+    try {
+      const res = await fetch(`/api/documents/${id}/view`)
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.error || 'Failed to download document')
+      }
+
+      const blob = await res.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = window.document.createElement('a')
+      a.style.display = 'none'
+      a.href = url
+      // Clean filename
+      const filename = (document?.title || 'document').replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf'
+      a.download = filename
+      window.document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(url)
+      a.remove()
+      toast.success('Download started!', { id: toastId })
+    } catch (err: any) {
+      console.error('Download error:', err)
+      toast.error(err.message || 'Secure download failed. Please try again.', { id: toastId })
+    }
   }
 
   const postComment = async (e: React.FormEvent) => {
@@ -147,7 +172,7 @@ export default function DocumentPage() {
             {/* PDF Viewer */}
             <div className="lg:col-span-2">
               <PDFViewer
-                fileUrl={document.file_url}
+                fileUrl={`/api/documents/${document.id}/view`}
                 isPremium={document.is_premium}
                 userHasPremium={isPremium}
                 documentId={document.id}

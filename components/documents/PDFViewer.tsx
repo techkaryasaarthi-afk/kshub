@@ -87,6 +87,64 @@ export function PDFViewer({ fileUrl, isPremium, userHasPremium, documentId }: PD
     if (pdfDoc) renderPage(currentPage)
   }, [pdfDoc, currentPage, scale, renderPage])
 
+  // Protect document from copy, print, save, inspect and devtools
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault()
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Prevent Ctrl+P (Print)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault()
+        return
+      }
+      // Prevent Ctrl+S (Save)
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault()
+        return
+      }
+      // Prevent Ctrl+C (Copy)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+        e.preventDefault()
+        return
+      }
+      // Prevent DevTools shortcuts: F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U (View Source)
+      if (
+        e.key === 'F12' ||
+        ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+        ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u'))
+      ) {
+        e.preventDefault()
+        return
+      }
+    }
+
+    // Disable drag start on canvas to prevent drag-save
+    const handleDragStart = (e: DragEvent) => {
+      e.preventDefault()
+    }
+
+    // Attach listeners
+    window.addEventListener('contextmenu', handleContextMenu)
+    window.addEventListener('keydown', handleKeyDown)
+    
+    const canvasElement = canvasRef.current
+    if (canvasElement) {
+      canvasElement.addEventListener('dragstart', handleDragStart)
+      canvasElement.style.userSelect = 'none'
+      canvasElement.style.webkitUserSelect = 'none'
+    }
+
+    return () => {
+      window.removeEventListener('contextmenu', handleContextMenu)
+      window.removeEventListener('keydown', handleKeyDown)
+      if (canvasElement) {
+        canvasElement.removeEventListener('dragstart', handleDragStart)
+      }
+    }
+  }, [pdfDoc])
+
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page)
@@ -148,6 +206,22 @@ export function PDFViewer({ fileUrl, isPremium, userHasPremium, documentId }: PD
 
       {/* Canvas area */}
       <div className="relative overflow-auto max-h-[70vh]">
+        {/* Style block to disable page printing and screenshot selection */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @media print {
+            body {
+              display: none !important;
+            }
+          }
+          canvas {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+        `}} />
         {loading ? (
           <div className="flex items-center justify-center h-96">
             <div className="flex flex-col items-center gap-3">
@@ -156,7 +230,7 @@ export function PDFViewer({ fileUrl, isPremium, userHasPremium, documentId }: PD
             </div>
           </div>
         ) : (
-          <div className="relative">
+          <div className="relative select-none" onContextMenu={(e) => e.preventDefault()}>
             <canvas ref={canvasRef} className="mx-auto my-4 shadow-lg rounded-lg" />
 
             {/* Paywall overlay */}
