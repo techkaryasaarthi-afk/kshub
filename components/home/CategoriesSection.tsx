@@ -3,6 +3,21 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
+const CORE_SLUGS = [
+  'research-papers',
+  'sip-reports',
+  'textbooks',
+  'thesis-dissertations',
+  'case-studies',
+  'stories-fiction',
+  'business-plans',
+  'technical-docs',
+  'international-resources',
+  'exam-prep',
+  'professional-guides',
+  'creative-works'
+]
+
 export function CategoriesSection() {
   const [categories, setCategories] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -11,7 +26,9 @@ export function CategoriesSection() {
     fetch('/api/categories')
       .then((res) => res.json())
       .then((res) => {
-        setCategories(res.data || [])
+        const fetched = res.data || []
+        const filtered = fetched.filter((cat: any) => CORE_SLUGS.includes(cat.slug))
+        setCategories(filtered)
         setLoading(false)
       })
       .catch((err) => {

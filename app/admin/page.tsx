@@ -71,6 +71,35 @@ export default function AdminPage() {
     }
   }
 
+  const handleTogglePremium = async (userId: string, currentlyPremium: boolean) => {
+    const action = currentlyPremium ? 'revoke' : 'grant'
+    const res = await fetch('/api/admin/users', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, premium_action: action }),
+    })
+    if (res.ok) {
+      setUsers((prevUsers) =>
+        prevUsers.map((u) => {
+          if (u.id === userId) {
+            const updatedSubscriptions = action === 'grant' 
+              ? [{ plan: 'premium', status: 'active' }] 
+              : [{ plan: 'free', status: 'expired' }]
+            return { ...u, subscriptions: updatedSubscriptions }
+          }
+          return u
+        })
+      )
+      setStats((prev) => ({
+        ...prev,
+        premium: prev.premium + (action === 'grant' ? 1 : -1)
+      }))
+      toast.success(action === 'grant' ? 'Premium access granted' : 'Premium access revoked')
+    } else {
+      toast.error('Failed to update premium access')
+    }
+  }
+
   const toggleDocPublish = async (docId: string, currentState: boolean) => {
     const res = await fetch('/api/admin/documents', {
       method: 'PATCH',
@@ -247,13 +276,14 @@ export default function AdminPage() {
                         </span>
                       </td>
                       <td className="px-5 py-3.5">
-                        {user.subscriptions?.[0]?.plan === 'premium' ? (
-                          <span className="flex items-center gap-1 text-amber-600 text-xs font-medium">
-                            <Crown className="w-3 h-3" /> Premium
-                          </span>
-                        ) : (
-                          <span className="text-gray-400 text-xs">Free</span>
-                        )}
+                        <select
+                          value={user.subscriptions?.[0]?.plan === 'premium' && user.subscriptions?.[0]?.status === 'active' ? 'premium' : 'free'}
+                          onChange={(e) => handleTogglePremium(user.id, e.target.value === 'free')}
+                          className="px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-semibold bg-white focus:outline-none focus:ring-2 focus:ring-[#1D4ED8]/30 cursor-pointer shadow-sm text-gray-700 transition-all hover:border-gray-300"
+                        >
+                          <option value="free">Free</option>
+                          <option value="premium">★ Premium</option>
+                        </select>
                       </td>
                       <td className="px-5 py-3.5 text-gray-500 text-xs">{formatDate(user.created_at)}</td>
                       <td className="px-5 py-3.5 text-right">

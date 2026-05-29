@@ -379,7 +379,7 @@ export function Navbar() {
                     { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
                     { icon: Upload, label: 'Upload Document', href: '/upload' },
                     { icon: Crown, label: 'Subscription', href: '/subscription' },
-                  ].map((item) => (
+                  ].filter((item) => !(item.label === 'Dashboard' && profile.role === 'admin')).map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -494,10 +494,11 @@ export function Navbar() {
             <div className="pt-4 border-t border-[#EFEEEC] space-y-2">
               {profile ? (
                 <>
-                  {profile.role === 'admin' && (
+                  {profile.role === 'admin' ? (
                     <Link href="/admin" onClick={() => setMobileMenuOpen(false)} className="btn-primary w-full justify-center mb-2">Admin Panel</Link>
+                  ) : (
+                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="btn-primary w-full justify-center">Dashboard</Link>
                   )}
-                  <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="btn-primary w-full justify-center">Dashboard</Link>
                   <button onClick={() => { handleSignOut(); setMobileMenuOpen(false) }} className="btn-secondary w-full justify-center">Sign out</button>
                 </>
               ) : (

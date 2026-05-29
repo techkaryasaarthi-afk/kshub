@@ -52,14 +52,63 @@ export async function PATCH(req: NextRequest) {
   const user = await checkAdmin()
   if (!user) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
-  const { user_id, role } = await req.json()
+  const { user_id, role, premium_action } = await req.json()
   const supabase = await createAdminClient()
 
-  const { error } = await supabase
-    .from('profiles')
-    .update({ role })
-    .eq('id', user_id)
+  if (premium_action) {
+    if (premium_action === 'grant') {
+      const { data: existingSub } = await supabase
+        .from('subscriptions')
+        .select('id')
+        .eq('user_id', user_id)
+        .maybeSingle()
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json({ success: true })
+      if (existingSub) {
+        const { error } = await supabase
+          .from('subscriptions')
+          .update({
+            plan: 'premium',
+            status: 'active',
+            end_date: null
+          })
+          .eq('id', existingSub.id)
+        if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      } else {
+        const { error } = await supabase
+          .from('subscriptions')
+          .insert({
+            user_id,
+            plan: 'premium',
+            status: 'active',
+            end_date: null
+          })
+        if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      }
+      return NextResponse.json({ success: true })
+    } else if (premium_action === 'revoke') {
+      const { error } = await supabase
+        .from('subscriptions')
+        .update({
+          plan: 'free',
+          status: 'expired',
+          end_date: new Date().toISOString()
+        })
+        .eq('user_id', user_id)
+
+      if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json({ success: true })
+    }
+  }
+
+  if (role) {
+    const { error } = await supabase
+      .from('profiles')
+      .update({ role })
+      .eq('id', user_id)
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ success: true })
+  }
+
+  return NextResponse.json({ error: 'Invalid parameters provided' }, { status: 400 })
 }

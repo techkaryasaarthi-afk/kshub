@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: NextRequest) {
   const supabase = await createClient()
   
@@ -29,10 +31,19 @@ export async function GET(req: NextRequest) {
     'creative-works'
   ]
 
-  // Filter out any other categories and sort according to customOrder
-  const sortedCategories = categories
-    .filter((cat) => customOrder.includes(cat.slug))
-    .sort((a, b) => customOrder.indexOf(a.slug) - customOrder.indexOf(b.slug))
+  // Sort categories: customOrder first, then any other dynamic categories at the end
+  const sortedCategories = [...categories].sort((a, b) => {
+    const aIndex = customOrder.indexOf(a.slug)
+    const bIndex = customOrder.indexOf(b.slug)
+    
+    if (aIndex !== -1 && bIndex !== -1) {
+      return aIndex - bIndex
+    }
+    if (aIndex !== -1) return -1
+    if (bIndex !== -1) return 1
+    
+    return a.name.localeCompare(b.name)
+  })
 
   // Fetch count of documents per category from database
   const { data: docCounts } = await supabase
@@ -80,5 +91,9 @@ export async function GET(req: NextRequest) {
     }
   })
 
-  return NextResponse.json({ data: result })
+  return NextResponse.json({ data: result }, {
+    headers: {
+      'Cache-Control': 'no-store, max-age=0, must-revalidate',
+    }
+  })
 }
