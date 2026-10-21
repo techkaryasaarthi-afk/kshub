@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   description: 'Manage your documents, saved items, and subscription on KSHub.',
 }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode })  {
   return <>{children}</>
 }
