@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-export const metadata: Metadata = {
+export const metadata: Metadata =  {
   title: 'Dashboard | KSHub',
   description: 'Manage your documents, saved items, and subscription on KSHub.',
 }
