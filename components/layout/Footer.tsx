@@ -71,7 +71,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3.5 group">
-              <span className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-2xl overflow-hidden border-2 border-[#d29a27] bg-white p-0.5 shadow-xl shadow-[#d29a27]/25 group-hover:scale-105 group-hover:border-[#f5d778] transition-all duration-300 shrink-0">
+              <span className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-2xl overflow-hidden border-2 border-[#d29a27] bg-white p-0.5 shadow-xl shadow-[#d29a27]/25 glow-aura-gold group-hover:scale-105 group-hover:border-[#f5d778] transition-all duration-300 shrink-0">
                 <Image
                   src="/karya-saarthi-logo.jpg"
                   alt="Karya Saarthi — Your Trusted Work Companion"
@@ -96,7 +96,7 @@ export function Footer() {
             </p>
 
             <div className="pt-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-[#d29a27]/40 text-[#f0d488] text-[11px] font-semibold">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-[#d29a27]/40 text-[#f0d488] text-[11px] font-semibold hover:border-[#f5d778] hover:bg-white/10 transition-colors">
                 ✨ Your Trusted Work Companion
               </span>
             </div>

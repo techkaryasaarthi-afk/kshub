@@ -104,18 +104,18 @@ export function PricingSection() {
           {PLANS.map((plan) => (
             <div
               key={plan.name}
-              className={`relative rounded-3xl p-7 flex flex-col min-w-0 transition-all duration-300 hover:-translate-y-2 ${
+              className={`relative rounded-3xl p-7 flex flex-col min-w-0 transition-all duration-300 hover:-translate-y-2.5 ${
                 plan.highlight
-                  ? 'bg-gradient-to-br from-[#071b31] via-[#102f53] to-[#168f8a] text-white shadow-[0_28px_70px_rgba(16,47,83,0.3)] ring-2 ring-[#f5d778]/70 hover:shadow-[0_36px_85px_rgba(210,154,39,0.25)]'
-                  : 'bg-white shadow-[0_10px_32px_rgba(16,47,83,0.06)] border border-[#102f53]/[0.09] hover:border-[#d29a27]/50 hover:shadow-[0_20px_45px_rgba(16,47,83,0.12)]'
+                  ? 'bg-gradient-to-br from-[#071b31] via-[#102f53] to-[#168f8a] text-white shadow-[0_28px_70px_rgba(16,47,83,0.35)] ring-2 ring-[#f5d778] hover:shadow-[0_36px_85px_rgba(210,154,39,0.35)]'
+                  : 'bg-white shadow-[0_10px_32px_rgba(16,47,83,0.06)] border border-[#102f53]/[0.09] hover:border-[#d29a27]/60 hover:shadow-[0_20px_45px_rgba(16,47,83,0.14)]'
               }`}
             >
               {/* Badge chip */}
               {plan.badge && (
                 <div
-                  className={`absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider whitespace-nowrap shadow-lg ${
+                  className={`shine-sweep absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider whitespace-nowrap shadow-xl ${
                     plan.highlight
-                      ? 'bg-gradient-to-r from-[#f5d778] via-[#e5b84d] to-[#f0d488] text-[#102f53]'
+                      ? 'bg-gradient-to-r from-[#f5d778] via-[#e5b84d] to-[#f0d488] text-[#102f53] ring-2 ring-[#f5d778]/50'
                       : 'bg-[#102f53] text-[#f5d778] border border-[#d29a27]/40'
                   }`}
                   style={{ fontFamily: 'var(--font-manrope)' }}

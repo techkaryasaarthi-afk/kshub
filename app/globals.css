@@ -502,6 +502,145 @@ select:focus {
   }
 }
 
+/* === Additional Stylish Animations === */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
+
+@keyframes borderSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.border-spin-conic {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-spin-conic::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent,
+    rgba(210, 154, 39, 0.7),
+    rgba(245, 215, 120, 1),
+    rgba(22, 143, 138, 0.8),
+    transparent 60%
+  );
+  animation: borderSpin 6s linear infinite;
+}
+
+.border-spin-conic-inner {
+  position: relative;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.4;
+  }
+  33% {
+    transform: translateY(-16px) translateX(8px) scale(1.15);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translateY(8px) translateX(-8px) scale(0.9);
+    opacity: 0.5;
+  }
+}
+
+.animate-particle-1 {
+  animation: particleFloat 7s ease-in-out infinite;
+}
+
+.animate-particle-2 {
+  animation: particleFloat 9s ease-in-out 1.5s infinite;
+}
+
+.animate-particle-3 {
+  animation: particleFloat 8s ease-in-out 3s infinite;
+}
+
+@keyframes goldAuraGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(210, 154, 39, 0.25), 0 0 40px rgba(210, 154, 39, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(210, 154, 39, 0.5), 0 0 70px rgba(210, 154, 39, 0.2);
+  }
+}
+
+.glow-aura-gold {
+  animation: goldAuraGlow 4s ease-in-out infinite;
+}
+
+/* Nav Link Underline Expansion */
+.nav-link-animated {
+  position: relative;
+}
+
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #d29a27, #168f8a);
+  border-radius: 9999px;
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-link-animated:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Card interactive glow */
+.hover-glow-card {
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hover-glow-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px -10px rgba(16, 47, 83, 0.15), 0 0 20px rgba(22, 143, 138, 0.12);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

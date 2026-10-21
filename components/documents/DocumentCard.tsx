@@ -18,14 +18,14 @@ export function DocumentCard({ document }: { document: Document }) {
   const catColor = categoryColors[document.categories?.slug || 'default'] || categoryColors.default
 
   return (
-    <Link href={`/documents/${document.id}`} className="doc-card group block rounded-3xl overflow-hidden border border-[#102f53]/[0.08] hover:border-[#d29a27]/60 hover:shadow-[0_20px_45px_rgba(16,47,83,0.13)] transition-all duration-300 hover:-translate-y-1.5 bg-white">
+    <Link href={`/documents/${document.id}`} className="doc-card group block rounded-3xl overflow-hidden border border-[#102f53]/[0.08] hover:border-[#d29a27]/70 hover:shadow-[0_24px_50px_rgba(16,47,83,0.16)] transition-all duration-300 hover:-translate-y-2 bg-white">
       {/* Thumbnail */}
       <div className="relative aspect-[3/4] bg-gradient-to-br from-[#eee7d9] to-[#dce9e4] overflow-hidden">
         {document.thumb_url ? (
           <img
             src={document.thumb_url}
             alt={document.title}
-            className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
           />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#071b31] via-[#102f53] to-[#168f8a]">
@@ -35,6 +35,12 @@ export function DocumentCard({ document }: { document: Document }) {
             <div className="h-1.5 bg-white/15 rounded w-2/3" />
           </div>
         )}
+
+        {/* Shimmer sweep highlight on hover */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#071b31]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="pointer-events-none absolute bottom-3 left-3 right-3 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center py-2 px-3 rounded-xl bg-white/95 text-[#102f53] text-[11px] font-bold shadow-lg backdrop-blur-md">
+          View &amp; Download Document →
+        </div>
 
         {/* Premium badge */}
         {document.is_premium && (
