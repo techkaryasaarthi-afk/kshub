@@ -15,6 +15,7 @@ export interface Category {
   name: string
   slug: string
   icon: string
+  countText?: string
 }
 
 export interface Document {

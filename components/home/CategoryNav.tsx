@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import type { Category } from '@/types'
 
 const CATEGORY_SUBITEMS: Record<string, string[]> = {
   'research-papers': ['Engineering', 'Medical', 'Social Sciences', 'Business', 'Artificial Intelligence'],
@@ -19,7 +20,7 @@ const CATEGORY_SUBITEMS: Record<string, string[]> = {
 }
 
 export function CategoryNav() {
-  const [categories, setCategories] = useState<any[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [active, setActive] = useState(0)
   const [loading, setLoading] = useState(true)
 
@@ -27,7 +28,8 @@ export function CategoryNav() {
     fetch('/api/categories')
       .then((res) => res.json())
       .then((res) => {
-        setCategories(res.data || [])
+        const fetched: Category[] = res.data || []
+        setCategories(fetched)
         setLoading(false)
       })
       .catch((err) => {

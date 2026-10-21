@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import type { Category } from '@/types'
 
 const CORE_SLUGS = [
   'research-papers',
@@ -19,15 +20,15 @@ const CORE_SLUGS = [
 ]
 
 export function CategoriesSection() {
-  const [categories, setCategories] = useState<any[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/categories')
       .then((res) => res.json())
       .then((res) => {
-        const fetched = res.data || []
-        const filtered = fetched.filter((cat: any) => CORE_SLUGS.includes(cat.slug))
+        const fetched: Category[] = res.data || []
+        const filtered = fetched.filter((cat) => CORE_SLUGS.includes(cat.slug))
         setCategories(filtered)
         setLoading(false)
       })
@@ -38,20 +39,24 @@ export function CategoriesSection() {
   }, [])
 
   return (
-    <section className="py-12 px-6 bg-white" id="categories">
-      <div className="max-w-[1280px] mx-auto">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#1D4ED8]/10 rounded-full text-xs font-semibold text-[#1D4ED8] mb-3 uppercase tracking-wider">
-            ✦ Content Library
+    <section className="relative py-20 px-6 bg-gradient-to-b from-[#fbf8f0] via-[#f7f2e7] to-[#fbf8f0] overflow-hidden" id="categories">
+      {/* Decorative ambient blurred blobs */}
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-[#168f8a]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-72 h-72 bg-[#d29a27]/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-[1280px] mx-auto relative z-10">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#168f8a]/10 border border-[#168f8a]/20 rounded-full text-xs font-bold text-[#137a77] mb-3 uppercase tracking-wider shadow-sm">
+            <span className="text-[#d29a27]">✦</span> Curated for curious minds
           </div>
           <h2
-            className="text-3xl lg:text-4xl font-extrabold text-[#1A1C1B] mb-3"
+            className="text-3xl lg:text-4xl font-extrabold text-[#102f53] mb-3"
             style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}
           >
-            12 Categories. One Library.
+            12 Knowledge Categories. One Library.
           </h2>
           <p
-            className="text-sm text-[#475569] max-w-[620px] mx-auto leading-relaxed"
+            className="text-sm text-[#516273] max-w-[620px] mx-auto leading-relaxed font-medium"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             MBA reports, dissertation papers, textbooks, and case studies — digitally organised and instantly accessible.
@@ -61,27 +66,29 @@ export function CategoriesSection() {
         {loading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="h-16 bg-[#F4F3F1] rounded-xl animate-pulse" />
+              <div key={i} className="h-20 bg-[#eee7d9] rounded-2xl animate-pulse" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5">
             {categories.map((cat) => (
               <Link
                 key={cat.id}
                 href={`/search?category=${cat.slug}`}
-                className="flex items-center gap-3 p-3 bg-[#FAF9F7] border border-gray-200/50 rounded-xl hover:border-[#1D4ED8]/30 hover:bg-[#1D4ED8]/5 hover:shadow-md transition-all min-w-0"
+                className="group flex items-center gap-3 p-4 bg-white/90 backdrop-blur-sm border border-[#102f53]/[0.08] rounded-2xl hover:border-[#d29a27] hover:bg-white hover:shadow-[0_16px_36px_rgba(210,154,39,.14)] hover:-translate-y-1.5 transition-all duration-300 min-w-0"
               >
-                <span className="text-2xl shrink-0">{cat.icon || '📄'}</span>
+                <span className="text-2xl shrink-0 group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300">
+                  {cat.icon || '📄'}
+                </span>
                 <div className="min-w-0 flex-1">
                   <span
-                    className="block text-xs font-bold text-gray-800 truncate leading-tight mb-0.5"
+                    className="block text-xs font-bold text-[#102f53] group-hover:text-[#168f8a] truncate leading-tight mb-0.5 transition-colors"
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
                     {cat.name}
                   </span>
                   <span 
-                    className="block text-[10px] text-gray-400 font-medium"
+                    className="block text-[10px] text-[#87939c] font-medium"
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
                     {cat.countText || '0 docs'}

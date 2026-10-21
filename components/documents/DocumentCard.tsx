@@ -18,61 +18,61 @@ export function DocumentCard({ document }: { document: Document }) {
   const catColor = categoryColors[document.categories?.slug || 'default'] || categoryColors.default
 
   return (
-    <Link href={`/documents/${document.id}`} className="doc-card group block">
+    <Link href={`/documents/${document.id}`} className="doc-card group block rounded-3xl overflow-hidden border border-[#102f53]/[0.08] hover:border-[#d29a27]/60 hover:shadow-[0_20px_45px_rgba(16,47,83,0.13)] transition-all duration-300 hover:-translate-y-1.5 bg-white">
       {/* Thumbnail */}
-      <div className="relative aspect-[3/4] bg-gradient-to-br from-[#EFEEEC] to-[#E3E2E0] overflow-hidden">
+      <div className="relative aspect-[3/4] bg-gradient-to-br from-[#eee7d9] to-[#dce9e4] overflow-hidden">
         {document.thumb_url ? (
           <img
             src={document.thumb_url}
             alt={document.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#0F2C59] to-[#1D4ED8]">
-            <div className="text-4xl mb-2 opacity-50">📄</div>
-            <div className="h-1.5 bg-white/20 rounded w-3/4 mb-1.5" />
-            <div className="h-1.5 bg-white/15 rounded w-1/2 mb-1.5" />
-            <div className="h-1.5 bg-white/10 rounded w-2/3" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#071b31] via-[#102f53] to-[#168f8a]">
+            <div className="text-4xl mb-2 opacity-60 group-hover:scale-110 transition-transform duration-300">📄</div>
+            <div className="h-1.5 bg-white/25 rounded w-3/4 mb-1.5" />
+            <div className="h-1.5 bg-white/20 rounded w-1/2 mb-1.5" />
+            <div className="h-1.5 bg-white/15 rounded w-2/3" />
           </div>
         )}
 
         {/* Premium badge */}
         {document.is_premium && (
-          <div className="absolute top-2.5 left-2.5 flex items-center gap-1 px-2 py-0.5 bg-amber-400 rounded-full">
-            <Crown className="w-2.5 h-2.5 text-amber-900" />
-            <span className="text-[10px] font-bold text-amber-900" style={{ fontFamily: 'var(--font-manrope)' }}>Premium</span>
+          <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 bg-amber-400/95 backdrop-blur-sm rounded-full shadow-md">
+            <Crown className="w-3 h-3 text-amber-950" />
+            <span className="text-[10px] font-extrabold text-amber-950 uppercase tracking-wider" style={{ fontFamily: 'var(--font-manrope)' }}>Premium</span>
           </div>
         )}
 
         {/* Category badge */}
         {document.categories && (
-          <div className={`absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-semibold ${catColor}`} style={{ fontFamily: 'var(--font-manrope)' }}>
+          <div className={`absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold shadow-sm backdrop-blur-sm ${catColor}`} style={{ fontFamily: 'var(--font-manrope)' }}>
             {document.categories.name}
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        <h3 className="text-sm font-semibold text-[#1A1C1B] line-clamp-2 mb-2 leading-snug group-hover:text-[#1D4ED8] transition-colors" style={{ fontFamily: 'var(--font-manrope)' }}>
+      <div className="p-5">
+        <h3 className="text-sm font-bold text-[#102f53] line-clamp-2 mb-1.5 leading-snug group-hover:text-[#168f8a] transition-colors" style={{ fontFamily: 'var(--font-manrope)' }}>
           {document.title}
         </h3>
 
         {document.profiles && (
-          <p className="text-xs text-[#6F797A] mb-3 truncate" style={{ fontFamily: 'var(--font-manrope)' }}>
-            {document.profiles.full_name}
+          <p className="text-xs text-[#6F797A] mb-3 truncate font-medium" style={{ fontFamily: 'var(--font-manrope)' }}>
+            By {document.profiles.full_name}
           </p>
         )}
 
         {/* Rating + Views */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className={`w-3 h-3 ${i < 4 ? 'fill-amber-400 text-amber-400' : 'text-[#BEC8CA]'}`} />
             ))}
           </div>
-          <span className="flex items-center gap-1 text-[11px] text-[#6F797A] ml-auto" style={{ fontFamily: 'var(--font-manrope)' }}>
-            <Eye className="w-3 h-3" /> {formatViews(document.views)}
+          <span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#6F797A] ml-auto font-mono">
+            <Eye className="w-3 h-3 text-[#168f8a]" /> {formatViews(document.views)}
           </span>
         </div>
       </div>

@@ -43,14 +43,14 @@ export function FaqSection() {
   }
 
   return (
-    <section className="py-20 bg-white border-t border-[rgba(190,200,202,0.2)]">
+    <section className="py-20 bg-white border-t border-[#102f53]/[0.08]">
       <div className="max-w-[800px] mx-auto px-6">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#1D4ED8]/10 rounded-full text-xs font-semibold text-[#1D4ED8] mb-3 uppercase tracking-wider">
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#168f8a]/10 rounded-full text-xs font-semibold text-[#137a77] mb-3 uppercase tracking-wider">
             <HelpCircle className="w-3.5 h-3.5" /> FAQ
           </div>
           <h2
-            className="text-3xl lg:text-4xl font-extrabold text-[#1A1C1B] mb-4"
+            className="text-3xl lg:text-4xl font-extrabold text-[#102f53] mb-4"
             style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.03em' }}
           >
             Frequently Asked Questions
@@ -71,8 +71,8 @@ export function FaqSection() {
                 key={index}
                 className={`border rounded-2xl transition-all duration-200 ${
                   isOpen
-                    ? 'border-[#1D4ED8] bg-[#1D4ED8]/[0.02] shadow-[0_4px_20px_rgba(29,78,216,0.05)]'
-                    : 'border-gray-200 hover:border-gray-300 bg-[#FAF9F7]'
+                    ? 'border-[#168f8a] bg-[#168f8a]/[0.03] shadow-[0_8px_24px_rgba(22,143,138,0.08)]'
+                    : 'border-[#102f53]/[0.10] hover:border-[#d29a27]/50 bg-[#fbf8f0]'
                 }`}
               >
                 <button
@@ -81,7 +81,7 @@ export function FaqSection() {
                 >
                   <span
                     className={`font-semibold text-sm transition-colors duration-150 ${
-                      isOpen ? 'text-[#0F2C59]' : 'text-[#1A1C1B]'
+                      isOpen ? 'text-[#137a77]' : 'text-[#102f53]'
                     }`}
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
@@ -89,7 +89,7 @@ export function FaqSection() {
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 text-gray-500 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-[#1D4ED8]' : ''
+                      isOpen ? 'rotate-180 text-[#d29a27]' : ''
                     }`}
                   />
                 </button>

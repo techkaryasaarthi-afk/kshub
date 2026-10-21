@@ -7,14 +7,14 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
   if (documents.length === 0) return null
 
   return (
-    <section className="py-16 bg-[#FAF9F7]">
+    <section className="py-20 bg-[#f5f0e5]">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
         {/* Section header */}
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="label-lg text-[#1D4ED8] mb-2">Community</p>
+            <p className="label-lg text-[#168f8a] mb-2">Community</p>
             <h2
-              className="text-3xl lg:text-4xl font-bold text-[#1A1C1B]"
+              className="text-3xl lg:text-4xl font-bold text-[#102f53]"
               style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.03em' }}
             >
               Recently Added
@@ -22,7 +22,7 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
           </div>
           <Link
             href="/search?sort=newest"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#1D4ED8] hover:gap-2.5 transition-all"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#137a77] hover:gap-2.5 transition-all"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all <ArrowRight className="w-4 h-4" />
@@ -39,7 +39,7 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
         <div className="mt-8 flex justify-center sm:hidden">
           <Link
             href="/search?sort=newest"
-            className="flex items-center gap-1.5 text-sm font-semibold text-[#1D4ED8]"
+            className="flex items-center gap-1.5 text-sm font-semibold text-[#137a77]"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all recent <ArrowRight className="w-4 h-4" />

@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Search, Upload, ChevronDown, User, BookOpen, LogOut, Crown, LayoutDashboard, X, Menu } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
 import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
+import type { Category } from '@/types'
 
 interface SubCategorySection {
   title: string
@@ -124,7 +126,7 @@ export function Navbar() {
   const router = useRouter()
   const { profile, isPremium, clearAuth } = useAuthStore()
   const [searchQuery, setSearchQuery] = useState('')
-  const [categories, setCategories] = useState<any[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -197,11 +199,25 @@ export function Navbar() {
         {/* Top bar */}
         <div className="max-w-[1280px] mx-auto px-6 h-14 flex items-center gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0 mr-2">
-            <img src="/karyasaarthi.png" alt="Karya Saarthi Logo" className="h-8 w-auto object-contain" />
-            <span className="font-display font-800 text-xl text-[#0F2C59] tracking-tight" style={{ fontFamily: 'var(--font-epilogue)', fontWeight: 800, letterSpacing: '-0.04em' }}>
-              KSHub
+          <Link href="/" className="flex items-center gap-3 shrink-0 mr-2 group">
+            <span className="relative h-11 w-11 rounded-xl overflow-hidden border-2 border-[#d29a27]/80 bg-white p-0.5 shadow-md shadow-[#d29a27]/15 group-hover:scale-105 group-hover:border-[#d29a27] transition-all duration-300">
+              <Image
+                src="/karya-saarthi-logo.jpg"
+                alt="Karya Saarthi Logo"
+                width={128}
+                height={128}
+                className="h-full w-full object-contain"
+                priority
+              />
             </span>
+            <div className="flex flex-col">
+              <span className="font-display text-xl font-extrabold text-[#102f53] tracking-tight group-hover:text-[#168f8a] transition-colors leading-none" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
+                KSHub
+              </span>
+              <span className="text-[9px] uppercase tracking-wider font-bold text-[#d29a27] mt-0.5 font-mono">
+                By Karya Saarthi
+              </span>
+            </div>
           </Link>
 
           {/* Mega-menu nav — desktop */}
@@ -318,7 +334,7 @@ export function Navbar() {
           {/* Upload — desktop */}
           <Link
             href="/upload"
-            className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#1D4ED8]/30 text-[#1D4ED8] text-sm font-semibold hover:bg-[#1D4ED8]/5 transition-all"
+            className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#168f8a]/30 text-[#137a77] text-sm font-semibold hover:bg-[#168f8a]/5 transition-all"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             <Upload className="w-3.5 h-3.5" />
@@ -328,7 +344,7 @@ export function Navbar() {
           {/* Auth buttons */}
           {!profile ? (
             <div className="hidden md:flex items-center gap-2">
-              <Link href="/login" className="px-4 py-2 text-sm font-semibold text-[#1A1C1B] hover:text-[#1D4ED8] transition-colors" style={{ fontFamily: 'var(--font-manrope)' }}>
+              <Link href="/login" className="px-4 py-2 text-sm font-semibold text-[#102f53] hover:text-[#168f8a] transition-colors" style={{ fontFamily: 'var(--font-manrope)' }}>
                 Log in
               </Link>
               <Link href="/signup" className="btn-primary !py-2 !px-5 !text-sm">
@@ -456,11 +472,18 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[60] bg-white overflow-y-auto">
           <div className="flex items-center justify-between px-6 h-16 border-b border-[#EFEEEC]">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
-              <img src="/karyasaarthi.png" alt="Karya Saarthi Logo" className="h-7 w-auto object-contain" />
-              <span className="font-display font-bold text-xl text-[#0F2C59]" style={{ fontFamily: 'var(--font-epilogue)', fontWeight: 800, letterSpacing: '-0.04em' }}>
-                KSHub
+            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2.5">
+              <span className="relative h-10 w-10 rounded-xl overflow-hidden border-2 border-[#d29a27]/80 bg-white p-0.5 shadow-sm">
+                <Image src="/karya-saarthi-logo.jpg" alt="Karya Saarthi Logo" width={128} height={128} className="h-full w-full object-contain" />
               </span>
+              <div className="flex flex-col">
+                <span className="font-display text-xl font-extrabold text-[#102f53]" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
+                  KSHub
+                </span>
+                <span className="text-[8px] uppercase tracking-wider font-bold text-[#d29a27] font-mono">
+                  By Karya Saarthi
+                </span>
+              </div>
             </Link>
             <button onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-xl hover:bg-[#F4F3F1]">
               <X className="w-5 h-5" />

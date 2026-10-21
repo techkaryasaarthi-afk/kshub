@@ -34,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${epilogue.variable} ${manrope.variable}`} suppressHydrationWarning>
-      <body className="font-body antialiased bg-[#FAF9F7] text-[#1A1C1B]" suppressHydrationWarning>
+      <body className="font-body antialiased bg-[#fbf8f0] text-[#172b40]" suppressHydrationWarning>
         <AuthProvider>
           {children}
           <Toaster
