@@ -232,26 +232,26 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Mega-menu nav — desktop */}
-          <div className="hidden lg:flex items-center gap-0.5" onMouseLeave={handleMouseLeave}>
+          {/* Mega-menu nav — desktop (All categories in BOLD as requested) */}
+          <div className="hidden lg:flex items-center gap-1" onMouseLeave={handleMouseLeave}>
             {PARENT_CATEGORIES.map((parent) => (
               <button
                 key={parent.name}
                 onMouseEnter={() => handleMouseEnter(parent.name)}
-                className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13px] font-semibold transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[13px] font-bold tracking-tight transition-all whitespace-nowrap cursor-pointer ${
                   activeMenu === parent.name
-                    ? 'bg-[#1D4ED8]/10 text-[#0F2C59] dark:bg-white/10 dark:text-white'
-                    : 'text-[#3F484A] dark:text-[#c2d1df] hover:text-[#1A1C1B] dark:hover:text-white hover:bg-[#EFEEEC] dark:hover:bg-white/10'
+                    ? 'bg-[#102f53] text-[#f5d778] dark:bg-white/15 dark:text-[#f5d778] shadow-sm'
+                    : 'text-[#102f53] dark:text-white hover:text-[#168f8a] dark:hover:text-[#5ed2c2] hover:bg-[#168f8a]/10 dark:hover:bg-white/10'
                 }`}
                 style={{ fontFamily: 'var(--font-manrope)' }}
               >
-                {parent.name}
+                <span>{parent.name}</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeMenu === parent.name ? 'rotate-180' : ''}`} />
               </button>
             ))}
             <Link
               href="/search"
-              className="flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13px] font-semibold text-[#3F484A] dark:text-[#c2d1df] hover:text-[#1A1C1B] dark:hover:text-white hover:bg-[#EFEEEC] dark:hover:bg-white/10 transition-all whitespace-nowrap"
+              className="flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13px] font-bold tracking-tight text-[#102f53] dark:text-white hover:text-[#168f8a] dark:hover:text-[#5ed2c2] hover:bg-[#168f8a]/10 dark:hover:bg-white/10 transition-all whitespace-nowrap"
               style={{ fontFamily: 'var(--font-manrope)' }}
             >
               All Documents
@@ -347,23 +347,36 @@ export function Navbar() {
           {/* Theme Toggle Button (Light / Dark Mode) */}
           <ThemeToggle />
 
-          {/* Upload — desktop */}
+          {/* Upload Button — Dedicated Light & Dark Theme Styling with Click Color Shift */}
           <Link
             href="/upload"
-            className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#168f8a]/30 text-[#137a77] text-sm font-semibold hover:bg-[#168f8a]/5 transition-all"
+            className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap shadow-sm
+              bg-gradient-to-r from-[#168f8a] to-[#127773] text-white hover:from-[#137a77] hover:to-[#0f6460] shadow-[#168f8a]/25 active:from-[#0d5552] active:to-[#093c3a] active:scale-95 active:ring-2 active:ring-[#d29a27]/50
+              dark:from-[#168f8a] dark:to-[#0f6460] dark:border dark:border-[#5ed2c2]/50 dark:shadow-[0_0_16px_rgba(94,210,194,0.3)] dark:hover:from-[#1ab3ad] dark:hover:to-[#168f8a] dark:hover:shadow-[0_0_22px_rgba(94,210,194,0.5)] dark:active:from-[#0b4745] dark:active:to-[#072f2e]"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
-            <Upload className="w-3.5 h-3.5" />
-            Upload
+            <Upload className="w-3.5 h-3.5 stroke-[2.5]" />
+            <span>Upload</span>
           </Link>
 
           {/* Auth buttons */}
           {!profile ? (
-            <div className="hidden md:flex items-center gap-2">
-              <Link href="/login" className="px-4 py-2 text-sm font-semibold text-[#102f53] hover:text-[#168f8a] transition-colors" style={{ fontFamily: 'var(--font-manrope)' }}>
-                Log in
+            <div className="hidden md:flex items-center gap-2.5">
+              {/* Log in Button — Dedicated Light & Dark Theme Styling with Click Color Shift */}
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border-2 text-xs sm:text-sm font-bold shadow-2xs transition-all duration-200 cursor-pointer whitespace-nowrap hover:scale-105 active:scale-95
+                  border-[#102f53]/25 bg-white/95 text-[#102f53] hover:border-[#102f53] hover:bg-[#102f53] hover:text-white active:bg-[#168f8a] active:border-[#168f8a] active:text-white active:ring-2 active:ring-[#d29a27]/40
+                  dark:border-white/25 dark:bg-white/10 dark:text-white dark:hover:border-white dark:hover:bg-white dark:hover:text-[#071b31] dark:active:bg-[#f5d778] dark:active:border-[#f5d778] dark:active:text-[#071b31]"
+                style={{ fontFamily: 'var(--font-manrope)' }}
+              >
+                <User className="w-3.5 h-3.5 stroke-[2.5]" />
+                <span>Log in</span>
               </Link>
-              <Link href="/signup" className="btn-primary !py-2 !px-5 !text-sm">
+              <Link
+                href="/signup"
+                className="btn-primary !py-2 !px-5 !text-xs sm:!text-sm !font-bold whitespace-nowrap hover:scale-105 active:scale-95 transition-all duration-200 shadow-md shadow-[#d29a27]/25 dark:shadow-[0_0_18px_rgba(245,215,120,0.35)]"
+              >
                 Start Free Trial
               </Link>
             </div>
@@ -533,7 +546,15 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
-            <div className="pt-4 border-t border-[#EFEEEC] space-y-2">
+            <div className="pt-4 border-t border-[#EFEEEC] dark:border-white/10 space-y-2.5">
+              <Link
+                href="/upload"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#168f8a] to-[#127773] text-white text-sm font-bold shadow-sm"
+              >
+                <Upload className="w-4 h-4 stroke-[2.5]" />
+                <span>Upload Document</span>
+              </Link>
               {profile ? (
                 <>
                   {profile.role === 'admin' ? (
@@ -544,10 +565,14 @@ export function Navbar() {
                   <button onClick={() => { handleSignOut(); setMobileMenuOpen(false) }} className="btn-secondary w-full justify-center">Sign out</button>
                 </>
               ) : (
-                <>
-                  <Link href="/signup" onClick={() => setMobileMenuOpen(false)} className="btn-primary w-full justify-center">Start Free Trial</Link>
-                  <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="btn-secondary w-full justify-center">Log in</Link>
-                </>
+                <div className="flex gap-2.5">
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="flex-1 flex items-center justify-center py-2.5 px-4 rounded-xl border-2 border-[#102f53]/25 dark:border-white/20 text-[#102f53] dark:text-white font-bold text-sm bg-white dark:bg-white/5 shadow-2xs">
+                    Log in
+                  </Link>
+                  <Link href="/signup" onClick={() => setMobileMenuOpen(false)} className="flex-1 btn-primary justify-center text-sm !py-2.5 font-bold shadow-md">
+                    Start Free Trial
+                  </Link>
+                </div>
               )}
             </div>
           </div>
