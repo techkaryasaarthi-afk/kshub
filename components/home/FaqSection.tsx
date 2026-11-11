@@ -43,27 +43,27 @@ export function FaqSection() {
   }
 
   return (
-    <section className="py-20 bg-white border-t border-[#102f53]/[0.08]">
-      <div className="max-w-[800px] mx-auto px-6">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#168f8a]/10 rounded-full text-xs font-semibold text-[#137a77] mb-3 uppercase tracking-wider">
+    <section className="py-14 sm:py-20 bg-white dark:bg-[#071b31] border-t border-[#102f53]/[0.08] dark:border-white/10 transition-colors duration-300">
+      <div className="max-w-[800px] mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 bg-[#168f8a]/10 dark:bg-[#168f8a]/20 rounded-full text-[11px] sm:text-xs font-semibold text-[#137a77] dark:text-[#5ed2c2] mb-3 uppercase tracking-wider">
             <HelpCircle className="w-3.5 h-3.5" /> FAQ
           </div>
           <h2
-            className="text-3xl lg:text-4xl font-extrabold text-[#102f53] mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#102f53] dark:text-white mb-3 sm:mb-4"
             style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.03em' }}
           >
             Frequently Asked Questions
           </h2>
           <p
-            className="text-sm text-gray-500 max-w-[500px] mx-auto"
+            className="text-xs sm:text-sm text-gray-500 dark:text-[#a0b0bf] max-w-[500px] mx-auto"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             Have questions about KSHub? Find answers to the most common inquiries below.
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index
             return (
@@ -71,36 +71,36 @@ export function FaqSection() {
                 key={index}
                 className={`border rounded-2xl transition-all duration-200 ${
                   isOpen
-                    ? 'border-[#168f8a] bg-[#168f8a]/[0.03] shadow-[0_8px_24px_rgba(22,143,138,0.08)]'
-                    : 'border-[#102f53]/[0.10] hover:border-[#d29a27]/50 bg-[#fbf8f0]'
+                    ? 'border-[#168f8a] bg-[#168f8a]/[0.04] dark:bg-[#168f8a]/10 shadow-[0_8px_24px_rgba(22,143,138,0.08)]'
+                    : 'border-[#102f53]/[0.10] dark:border-white/10 hover:border-[#d29a27]/50 bg-[#fbf8f0] dark:bg-[#0b2542]'
                 }`}
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between text-left px-6 py-5 focus:outline-none"
+                  className="w-full flex items-center justify-between text-left px-4 sm:px-6 py-4 sm:py-5 focus:outline-none gap-3 cursor-pointer"
                 >
                   <span
-                    className={`font-semibold text-sm transition-colors duration-150 ${
-                      isOpen ? 'text-[#137a77]' : 'text-[#102f53]'
+                    className={`font-semibold text-xs sm:text-sm transition-colors duration-150 leading-snug ${
+                      isOpen ? 'text-[#137a77] dark:text-[#5ed2c2]' : 'text-[#102f53] dark:text-white'
                     }`}
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-4 h-4 text-gray-500 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-[#d29a27]' : ''
+                    className={`w-4 h-4 text-gray-500 dark:text-[#a0b0bf] shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-[#d29a27] dark:text-[#f5d778]' : ''
                     }`}
                   />
                 </button>
 
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isOpen ? 'max-h-48' : 'max-h-0'
+                    isOpen ? 'max-h-[600px]' : 'max-h-0'
                   }`}
                 >
                   <p
-                    className="px-6 pb-5 text-xs text-gray-500 leading-relaxed border-t border-transparent pt-1"
+                    className="px-4 sm:px-6 pb-4 sm:pb-5 text-xs sm:text-sm text-[#516273] dark:text-[#c2d1df] leading-relaxed border-t border-[#102f53]/[0.06] dark:border-white/10 pt-3 sm:pt-4"
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
                     {faq.answer}

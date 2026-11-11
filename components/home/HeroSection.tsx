@@ -9,55 +9,55 @@ export function HeroSection() {
   const { profile } = useAuthStore()
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#071b31] pt-24 text-white">
+    <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#fbf8f0] via-[#f7f2e6] to-[#fbf8f0] text-[#102f53] dark:from-[#071b31] dark:via-[#09223e] dark:to-[#071b31] dark:text-white pt-20 sm:pt-24 transition-colors duration-300">
       {/* 1. Animated Ambient Atmospheric Orbs & Floating Particles */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="pulse-glow absolute -left-28 top-10 h-[30rem] w-[30rem] rounded-full bg-[#168f8a]/20 blur-[130px]" />
-        <div className="pulse-glow absolute -right-20 top-4 h-[36rem] w-[36rem] rounded-full bg-[#d29a27]/20 blur-[140px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[40rem] w-[40rem] rounded-full bg-[#0b2542]/60 blur-[160px]" />
+        <div className="pulse-glow absolute -left-28 top-10 h-[30rem] w-[30rem] rounded-full bg-[#168f8a]/12 dark:bg-[#168f8a]/20 blur-[130px]" />
+        <div className="pulse-glow absolute -right-20 top-4 h-[36rem] w-[36rem] rounded-full bg-[#d29a27]/15 dark:bg-[#d29a27]/20 blur-[140px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[40rem] w-[40rem] rounded-full bg-[#f0e6d2]/50 dark:bg-[#0b2542]/60 blur-[160px]" />
 
         {/* Ambient Floating Particle Sparkles */}
-        <div className="animate-particle-1 absolute top-[20%] left-[15%] h-3 w-3 rounded-full bg-[#f5d778] shadow-[0_0_12px_#f5d778]" />
-        <div className="animate-particle-2 absolute top-[35%] right-[22%] h-2.5 w-2.5 rounded-full bg-[#5ed2c2] shadow-[0_0_10px_#5ed2c2]" />
+        <div className="animate-particle-1 absolute top-[20%] left-[15%] h-3 w-3 rounded-full bg-[#d29a27] dark:bg-[#f5d778] shadow-[0_0_12px_#d29a27] dark:shadow-[0_0_12px_#f5d778]" />
+        <div className="animate-particle-2 absolute top-[35%] right-[22%] h-2.5 w-2.5 rounded-full bg-[#168f8a] dark:bg-[#5ed2c2] shadow-[0_0_10px_#168f8a] dark:shadow-[0_0_10px_#5ed2c2]" />
         <div className="animate-particle-3 absolute bottom-[25%] left-[30%] h-2 w-2 rounded-full bg-[#d29a27] shadow-[0_0_8px_#d29a27]" />
-        <div className="animate-particle-1 absolute top-[70%] right-[10%] h-3.5 w-3.5 rounded-full bg-[#5ed2c2]/70 blur-[1px]" />
+        <div className="animate-particle-1 absolute top-[70%] right-[10%] h-3.5 w-3.5 rounded-full bg-[#168f8a]/60 dark:bg-[#5ed2c2]/70 blur-[1px]" />
         
         {/* Subtle Square Grid Pattern */}
         <div
-          className="absolute inset-0 opacity-[0.065] [mask-image:radial-gradient(ellipse_85%_75%_at_50%_40%,#000_60%,transparent_100%)]"
+          className="absolute inset-0 opacity-[0.05] dark:opacity-[0.065] [mask-image:radial-gradient(ellipse_85%_75%_at_50%_40%,#000_60%,transparent_100%)]"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.25) 1px,transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(16,47,83,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(16,47,83,.25) 1px,transparent 1px)',
             backgroundSize: '64px 64px',
           }}
         />
       </div>
 
-      <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-6 pb-20 pt-14 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-8 lg:px-12 lg:pb-28 lg:pt-20">
+      <div className="mx-auto grid max-w-[1280px] items-center gap-10 sm:gap-12 px-4 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-10 xl:gap-14 lg:px-12 pb-16 sm:pb-20 lg:pb-28 pt-10 sm:pt-14 lg:pt-20">
         
         {/* Left Column: Hero Text & Search */}
-        <div className="relative z-10 max-w-[650px] text-center lg:text-left">
+        <div className="relative z-10 w-full max-w-[650px] mx-auto text-center lg:text-left">
           
           {/* Animated Badge */}
-          <div className="reveal-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-[#f5d778]/40 bg-white/[0.08] px-4 py-2 text-xs font-semibold tracking-wide text-[#f5d778] backdrop-blur-md shadow-lg shadow-[#d29a27]/15">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f5d778] opacity-75" />
+          <div className="reveal-up mb-5 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-[#d29a27]/30 dark:border-[#f5d778]/40 bg-white/80 dark:bg-white/[0.08] px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wide text-[#9d7115] dark:text-[#f5d778] backdrop-blur-md shadow-md shadow-[#d29a27]/10 max-w-full">
+            <span className="relative flex h-2 w-2 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d29a27] dark:bg-[#f5d778] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d29a27]" />
             </span>
-            <span>Knowledge grows when it is shared • <strong>Karya Saarthi Hub</strong></span>
+            <span className="truncate">Knowledge grows when it is shared • <strong>Karya Saarthi Hub</strong></span>
           </div>
 
           {/* Heading */}
-          <h1 className="reveal-up text-[clamp(2.7rem,5.5vw,4.8rem)] font-extrabold leading-[1.05] tracking-[-0.05em] text-white">
+          <h1 className="reveal-up text-[clamp(2.1rem,5.2vw,4.5rem)] font-extrabold leading-[1.08] tracking-[-0.04em] text-[#102f53] dark:text-white">
             A world of
             <br />
             knowledge,
             <br />
-            <span className="text-gradient-gold">
+            <span className="bg-gradient-to-r from-[#d29a27] via-[#c68918] to-[#168f8a] bg-clip-text text-transparent dark:from-[#fce588] dark:via-[#e5b84d] dark:to-[#f6d87a]">
               within reach.
             </span>
           </h1>
 
-          <p className="reveal-up-delay mx-auto mt-6 max-w-[540px] text-base leading-relaxed text-[#c2d1df] sm:text-lg lg:mx-0">
+          <p className="reveal-up-delay mx-auto mt-4 sm:mt-6 max-w-[540px] text-sm sm:text-base lg:text-lg leading-relaxed text-[#485c70] dark:text-[#c2d1df] lg:mx-0 font-medium">
             Discover research, MBA reports, dissertation papers, textbooks, and verified academic projects in one thoughtfully curated digital library.
           </p>
 
@@ -65,163 +65,230 @@ export function HeroSection() {
           <form
             action="/search"
             method="get"
-            className="reveal-up-delay mx-auto mt-8 flex max-w-[560px] items-center gap-3 rounded-2xl border border-white/20 bg-white/95 p-2 shadow-[0_20px_60px_rgba(0,0,0,.35)] backdrop-blur-md transition-all focus-within:border-[#f5d778] focus-within:ring-4 focus-within:ring-[#f5d778]/25 hover:border-white/40 lg:mx-0"
+            className="reveal-up-delay mx-auto mt-6 sm:mt-8 flex w-full max-w-[560px] items-center gap-2 sm:gap-3 rounded-2xl border-2 border-[#102f53]/15 dark:border-white/20 bg-white dark:bg-white/95 p-1.5 sm:p-2 shadow-[0_16px_45px_rgba(16,47,83,0.08)] dark:shadow-[0_20px_60px_rgba(0,0,0,.35)] backdrop-blur-md transition-all focus-within:border-[#168f8a] focus-within:ring-4 focus-within:ring-[#168f8a]/15 hover:border-[#d29a27]/60 lg:mx-0"
           >
-            <Search className="ml-3 h-5 w-5 shrink-0 text-[#168f8a]" />
+            <Search className="ml-2 sm:ml-3 h-4 sm:h-5 w-4 sm:w-5 shrink-0 text-[#168f8a]" />
             <input
               type="search"
               name="q"
-              placeholder="Search research papers, notes, textbooks, reports..."
+              placeholder="Search research papers, notes, reports..."
               aria-label="Search the library"
-              className="min-w-0 flex-1 border-0 bg-transparent px-2 py-3 text-sm text-[#102f53] font-medium outline-none placeholder:text-[#64748b] focus:border-0 focus:ring-0"
+              className="min-w-0 flex-1 border-0 bg-transparent px-1.5 sm:px-2 py-2 sm:py-3 text-xs sm:text-sm text-[#102f53] font-medium outline-none placeholder:text-[#64748b] focus:border-0 focus:ring-0"
             />
             <button
               type="submit"
-              className="shine-sweep inline-flex shrink-0 items-center gap-2 rounded-xl bg-gradient-to-r from-[#102f53] to-[#168f8a] px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:opacity-95 hover:shadow-lg sm:px-6 cursor-pointer"
+              className="shine-sweep inline-flex shrink-0 items-center gap-1.5 sm:gap-2 rounded-xl bg-gradient-to-r from-[#102f53] to-[#168f8a] px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-md transition-all hover:opacity-95 hover:shadow-lg cursor-pointer"
             >
-              Search <ArrowRight className="h-4 w-4" />
+              Search <ArrowRight className="h-3.5 sm:h-4 w-3.5 sm:w-4" />
             </button>
           </form>
 
           {/* Quick Trending Searches */}
-          <div className="reveal-up-delay mt-3 flex flex-wrap items-center justify-center gap-2 text-[11px] font-medium text-[#9cb1c5] lg:justify-start">
-            <span className="text-[#f5d778] font-semibold">Trending:</span>
-            <Link href="/search?q=SIP+Report" className="rounded-full bg-white/5 px-2.5 py-0.5 border border-white/10 hover:border-[#f5d778]/40 hover:text-[#f5d778] transition-colors">
+          <div className="reveal-up-delay mt-3 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[11px] font-medium text-[#64748b] dark:text-[#9cb1c5] lg:justify-start">
+            <span className="text-[#9d7115] dark:text-[#f5d778] font-bold">Trending:</span>
+            <Link href="/search?q=SIP+Report" className="rounded-full bg-white/80 dark:bg-white/5 px-2.5 py-0.5 border border-[#102f53]/10 dark:border-white/10 text-[#485c70] dark:text-[#9cb1c5] hover:border-[#d29a27]/60 hover:text-[#9d7115] dark:hover:text-[#f5d778] transition-colors shadow-2xs">
               #SIP Reports
             </Link>
-            <Link href="/search?q=Marketing" className="rounded-full bg-white/5 px-2.5 py-0.5 border border-white/10 hover:border-[#f5d778]/40 hover:text-[#f5d778] transition-colors">
+            <Link href="/search?q=Marketing" className="rounded-full bg-white/80 dark:bg-white/5 px-2.5 py-0.5 border border-[#102f53]/10 dark:border-white/10 text-[#485c70] dark:text-[#9cb1c5] hover:border-[#d29a27]/60 hover:text-[#9d7115] dark:hover:text-[#f5d778] transition-colors shadow-2xs">
               #Marketing Case Studies
             </Link>
-            <Link href="/search?q=Finance" className="rounded-full bg-white/5 px-2.5 py-0.5 border border-white/10 hover:border-[#f5d778]/40 hover:text-[#f5d778] transition-colors">
+            <Link href="/search?q=Finance" className="rounded-full bg-white/80 dark:bg-white/5 px-2.5 py-0.5 border border-[#102f53]/10 dark:border-white/10 text-[#485c70] dark:text-[#9cb1c5] hover:border-[#d29a27]/60 hover:text-[#9d7115] dark:hover:text-[#f5d778] transition-colors shadow-2xs">
               #Finance Thesis
             </Link>
-            <Link href="/search?q=AI" className="rounded-full bg-white/5 px-2.5 py-0.5 border border-white/10 hover:border-[#f5d778]/40 hover:text-[#f5d778] transition-colors">
+            <Link href="/search?q=AI" className="rounded-full bg-white/80 dark:bg-white/5 px-2.5 py-0.5 border border-[#102f53]/10 dark:border-white/10 text-[#485c70] dark:text-[#9cb1c5] hover:border-[#d29a27]/60 hover:text-[#9d7115] dark:hover:text-[#f5d778] transition-colors shadow-2xs">
               #AI Research
             </Link>
           </div>
 
-          {/* Action CTAs */}
-          <div className="mt-7 flex flex-col items-center justify-center gap-3.5 sm:flex-row lg:justify-start">
+          {/* Primary Action Buttons */}
+          <div className="reveal-up-delay mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:justify-start">
             <Link
-              href={profile ? '/search' : '/signup'}
-              className="shine-sweep inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-[#102f53] bg-gradient-to-r from-[#f5d778] via-[#e5b84d] to-[#f0d488] hover:shadow-xl hover:shadow-[#d29a27]/30 transition-all hover:-translate-y-0.5"
+              href="/search"
+              className="shine-sweep inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#d29a27] via-[#c68918] to-[#d29a27] px-6 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-[#d29a27]/25 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#d29a27]/35"
             >
               Explore the library <ArrowRight className="h-4 w-4" />
             </Link>
+
             <Link
               href="/upload"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-white/90 bg-white/5 border border-white/15 backdrop-blur hover:bg-white/15 hover:text-white transition-all hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-2xl border-2 border-[#102f53]/20 dark:border-white/20 bg-white/90 dark:bg-white/10 px-5 sm:px-6 py-3 sm:py-3.5 text-xs sm:text-sm font-bold text-[#102f53] dark:text-white backdrop-blur-sm transition-all hover:border-[#168f8a] hover:bg-white dark:hover:bg-white/20 hover:text-[#168f8a] dark:hover:text-[#5ed2c2] hover:shadow-md"
             >
-              <Upload className="h-4 w-4 text-[#5ed2c2]" /> Share your work
+              <Upload className="h-4 w-4 text-[#168f8a] dark:text-[#5ed2c2]" />
+              Share your work
             </Link>
           </div>
 
-          {/* Student Community Proof Avatar Stack */}
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
-            <div className="flex -space-x-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-[#168f8a] to-[#5ed2c2] text-xs font-bold text-white ring-2 ring-[#071b31]">
+          {/* Social Proof Avatars & Rating */}
+          <div className="reveal-up-delay mt-7 sm:mt-9 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+            <div className="flex -space-x-2.5">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white dark:border-[#071b31] bg-[#102f53] text-[10px] font-bold text-white shadow-sm">
                 DU
               </span>
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-[#d29a27] to-[#f5d778] text-xs font-bold text-[#102f53] ring-2 ring-[#071b31]">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white dark:border-[#071b31] bg-[#168f8a] text-[10px] font-bold text-white shadow-sm">
                 AK
               </span>
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-[#0b2542] to-[#168f8a] text-xs font-bold text-white ring-2 ring-[#071b31]">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white dark:border-[#071b31] bg-[#d29a27] text-[10px] font-bold text-white shadow-sm">
                 IP
               </span>
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 text-xs font-bold text-[#102f53] ring-2 ring-[#071b31]">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white dark:border-[#071b31] bg-[#0d2745] text-[10px] font-bold text-[#f5d778] shadow-sm">
                 BH
               </span>
             </div>
-            <div className="text-center sm:text-left">
-              <div className="flex items-center justify-center sm:justify-start gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+
+            <div className="text-left">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-[#d29a27] text-[#d29a27]" />
                 ))}
-                <span className="text-xs font-bold text-white ml-1">4.9 / 5</span>
+                <span className="text-xs font-bold text-[#102f53] dark:text-white ml-1">4.9 / 5</span>
               </div>
-              <p className="text-[11px] text-[#9cb1c5]">
+              <p className="text-[11px] text-[#516273] dark:text-[#9cb1c5]">
                 Trusted by <strong>25,000+</strong> students &amp; researchers across India
               </p>
             </div>
           </div>
 
           {/* Trust Highlights */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-xs font-semibold text-[#b8c7d6] lg:justify-start border-t border-white/10 pt-5">
-            <span className="inline-flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-[#5ed2c2]" /> 100% Plagiarism Checked
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 sm:gap-x-7 gap-y-2.5 text-[11px] sm:text-xs font-semibold text-[#516273] dark:text-[#b8c7d6] border-t border-[#102f53]/10 dark:border-white/10 pt-5">
+            <span className="inline-flex items-center gap-1.5 sm:gap-2">
+              <ShieldCheck className="h-4 w-4 text-[#168f8a] dark:text-[#5ed2c2] shrink-0" /> 100% Plagiarism Checked
             </span>
-            <span className="inline-flex items-center gap-2">
-              <BookOpen className="h-4 w-4 text-[#f5d778]" /> 12+ Knowledge Categories
+            <span className="inline-flex items-center gap-1.5 sm:gap-2">
+              <BookOpen className="h-4 w-4 text-[#d29a27] dark:text-[#f5d778] shrink-0" /> 12+ Knowledge Streams
             </span>
-            <span className="inline-flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" /> MCA Registered
+            <span className="inline-flex items-center gap-1.5 sm:gap-2">
+              <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" /> MCA Registered
             </span>
           </div>
         </div>
 
-        {/* Right Column: Interactive 3D Emblem Showcase with Floating Badges */}
-        <div className="relative mx-auto flex min-h-[420px] w-full max-w-[530px] items-center justify-center lg:min-h-[540px]">
+        {/* Right Column: Full Widescreen 16:9 Video Showcase with Watermark Concealment */}
+        <div className="relative mx-auto flex w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[580px] xl:max-w-[620px] flex-col items-center justify-center min-h-[340px] sm:min-h-[400px] lg:min-h-[460px]">
           {/* Dual Orbiting Rings */}
-          <div className="brand-orbit absolute h-[360px] w-[360px] rounded-full border border-dashed border-[#f5d778]/35 sm:h-[460px] sm:w-[460px]" />
-          <div className="brand-orbit-reverse absolute h-[320px] w-[320px] rounded-full border border-dashed border-[#168f8a]/35 sm:h-[420px] sm:w-[420px]" />
-          <div className="absolute h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle,rgba(210,154,39,.24),rgba(11,37,66,0)_70%)] sm:h-[400px] sm:w-[400px]" />
+          <div className="brand-orbit absolute pointer-events-none h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] lg:h-[480px] lg:w-[480px] rounded-full border border-dashed border-[#d29a27]/30 dark:border-[#f5d778]/30" />
+          <div className="brand-orbit-reverse absolute pointer-events-none h-[260px] w-[260px] sm:h-[350px] sm:w-[350px] lg:h-[430px] lg:w-[430px] rounded-full border border-dashed border-[#168f8a]/30 dark:border-[#168f8a]/30" />
+          <div className="absolute pointer-events-none h-[240px] w-[240px] sm:h-[340px] sm:w-[340px] lg:h-[400px] lg:w-[400px] rounded-full bg-[radial-gradient(circle,rgba(210,154,39,.18),rgba(11,37,66,0)_70%)] dark:bg-[radial-gradient(circle,rgba(210,154,39,.24),rgba(11,37,66,0)_70%)]" />
 
-          {/* Central Logo Showcase Card */}
-          <div className="float-slow glow-aura-gold relative z-10 w-[270px] overflow-hidden rounded-[34px] border-2 border-[#f5d778]/70 bg-gradient-to-b from-white via-white to-amber-50/95 p-4 shadow-[0_32px_90px_rgba(0,0,0,.6)] sm:w-[340px] group transition-transform duration-500 hover:scale-105">
-            <div className="relative aspect-square w-full rounded-[26px] overflow-hidden bg-white p-2">
-              <Image
-                src="/karya-saarthi-logo.jpg"
-                alt="Karya Saarthi — Your Trusted Work Companion"
-                width={1024}
-                height={1024}
-                className="h-full w-full object-contain"
-                priority
+          {/* Central 16:9 Video Showcase Card - Complete Video Visibility */}
+          <div className="float-slow glow-aura-gold relative z-10 w-full max-w-[340px] xs:max-w-[400px] sm:max-w-[460px] md:max-w-[500px] lg:max-w-[530px] xl:max-w-[570px] overflow-hidden rounded-[26px] sm:rounded-[32px] border-2 border-[#d29a27]/70 bg-gradient-to-b from-white via-white to-amber-50/95 dark:from-[#0b2542] dark:via-[#09223e] dark:to-[#071b31] p-3 sm:p-4 shadow-[0_24px_70px_rgba(16,47,83,0.14)] dark:shadow-[0_24px_70px_rgba(0,0,0,.55)] group transition-transform duration-500 hover:scale-[1.02]">
+            
+            {/* 16:9 Video Container: Displays the entire video without side cropping */}
+            <div className="relative aspect-[16/9] w-full rounded-[18px] sm:rounded-[24px] overflow-hidden bg-[#071b31] shadow-inner flex items-center justify-center">
+              <video
+                src="/karya-saarthi-hero.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                poster="/karya-saarthi-logo.jpg"
+                className="h-full w-full object-cover scale-[1.02] rounded-[18px] sm:rounded-[24px] pointer-events-none select-none transition-transform duration-700"
               />
+
+              {/* Bottom-right corner dark gradient specifically targeting the watermark location */}
+              <div className="pointer-events-none absolute bottom-0 right-0 w-36 sm:w-48 h-14 sm:h-18 bg-gradient-to-tl from-[#071b31] via-[#071b31]/95 to-transparent" />
+
+              {/* Subtle bottom edge gradient */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-4 bg-gradient-to-t from-[#071b31]/80 to-transparent" />
+
+              {/* Elegant Brand Cover Badge - Sits squarely over the Gemini watermark in bottom-right corner */}
+              <div className="pointer-events-none absolute bottom-2 sm:bottom-2.5 right-2 sm:right-2.5 z-20 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-[#071b31]/95 text-white border border-[#d29a27]/70 shadow-[0_4px_16px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#168f8a] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#5ed2c2]" />
+                </span>
+                <span className="text-[9px] sm:text-[10px] font-bold tracking-wider uppercase font-mono text-[#f5d778]">
+                  KSHub • HD
+                </span>
+              </div>
+
+              {/* Inner ambient ring */}
+              <div className="pointer-events-none absolute inset-0 rounded-[18px] sm:rounded-[24px] ring-1 ring-inset ring-white/10" />
             </div>
             
-            <div className="mt-3 rounded-2xl border border-[#d29a27]/30 bg-[#071b31]/95 px-4 py-3 text-center backdrop-blur-md shadow-lg">
-              <p className="text-[10px] font-bold uppercase tracking-[.24em] text-[#f5d778] font-mono">
-                Karya Saarthi Hub
-              </p>
-              <p className="mt-1 text-xs font-semibold text-white">
-                Your Trusted Work Companion
-              </p>
+            {/* Card Bottom Label Bar */}
+            <div className="mt-2.5 sm:mt-3 flex items-center justify-between gap-3 rounded-2xl border border-[#d29a27]/30 bg-gradient-to-r from-[#102f53] via-[#0d2745] to-[#168f8a] px-3.5 sm:px-4 py-2 sm:py-2.5 text-white shadow-md">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-white/10 border border-[#f5d778]/30">
+                  <Sparkles className="h-3.5 w-3.5 text-[#f5d778]" />
+                </span>
+                <div className="min-w-0 text-left">
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[.22em] text-[#f5d778] font-mono truncate">
+                    Karya Saarthi Hub
+                  </p>
+                  <p className="text-[10px] sm:text-[11px] font-semibold text-white/95 truncate">
+                    Your Trusted Work Companion
+                  </p>
+                </div>
+              </div>
+              <span className="hidden xs:inline-flex shrink-0 items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-[9px] font-semibold text-white/90">
+                Verified ✦
+              </span>
             </div>
           </div>
 
+          {/* Desktop/MacBook Floating Badges (Visible on lg: & xl: screens with safe margins — ZERO overlap) */}
           {/* Floating Badge 1: Top-Left */}
-          <div className="float-delay absolute -left-4 top-[10%] z-20 flex items-center gap-3 rounded-2xl border border-white/20 bg-[#0b2542]/90 px-4 py-3 shadow-[0_20px_45px_rgba(0,0,0,.35)] backdrop-blur-md hover:scale-105 transition-transform">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#168f8a]/25 text-[#5ed2c2]">
-              <BookOpen className="h-5 w-5" />
+          <div className="float-delay hidden lg:flex absolute -left-8 xl:-left-12 -top-2 lg:top-2 z-20 items-center gap-3 rounded-2xl border border-[#102f53]/10 dark:border-white/20 bg-white/95 dark:bg-[#0b2542]/90 px-4 py-2.5 shadow-[0_16px_36px_rgba(16,47,83,0.09)] dark:shadow-[0_20px_45px_rgba(0,0,0,.35)] backdrop-blur-md hover:scale-105 transition-transform whitespace-nowrap text-[#102f53] dark:text-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#168f8a]/15 text-[#137a77] dark:bg-[#168f8a]/25 dark:text-[#5ed2c2] shrink-0">
+              <BookOpen className="h-4 w-4" />
             </span>
             <span>
-              <strong className="block text-sm text-white font-bold">10,000+ Verified Reports</strong>
-              <small className="text-[11px] text-[#b8c7d6]">Read · Download · Learn</small>
+              <strong className="block text-xs font-bold">10,000+ Verified Reports</strong>
+              <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6]">Read · Download · Learn</small>
             </span>
           </div>
 
           {/* Floating Badge 2: Bottom-Right */}
-          <div className="float-reverse absolute -right-2 bottom-[10%] z-20 flex items-center gap-3 rounded-2xl border border-[#f5d778]/30 bg-[#0b2542]/95 px-4 py-3 shadow-[0_20px_45px_rgba(0,0,0,.35)] backdrop-blur-md hover:scale-105 transition-transform">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#d29a27]/20 text-[#f5d778]">
-              <Zap className="h-5 w-5" />
+          <div className="float-reverse hidden lg:flex absolute -right-6 xl:-right-10 -bottom-2 lg:bottom-2 z-20 items-center gap-3 rounded-2xl border border-[#d29a27]/30 bg-white/95 dark:bg-[#0b2542]/95 px-4 py-2.5 shadow-[0_16px_36px_rgba(16,47,83,0.09)] dark:shadow-[0_20px_45px_rgba(0,0,0,.35)] backdrop-blur-md hover:scale-105 transition-transform whitespace-nowrap text-[#102f53] dark:text-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#d29a27]/15 text-[#9d7115] dark:bg-[#d29a27]/20 dark:text-[#f5d778] shrink-0">
+              <Zap className="h-4 w-4" />
             </span>
             <span>
-              <strong className="block text-sm text-white font-bold">Instant Downloads</strong>
-              <small className="text-[11px] text-[#b8c7d6]">Lifetime Digital Access</small>
+              <strong className="block text-xs font-bold">Instant Downloads</strong>
+              <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6]">Lifetime Digital Access</small>
             </span>
           </div>
 
           {/* Floating Badge 3: Top-Right */}
-          <div className="float-slow absolute -right-4 top-[8%] z-20 hidden sm:flex items-center gap-2 rounded-2xl border border-amber-400/30 bg-[#071b31]/90 px-3.5 py-2 shadow-lg backdrop-blur-md">
-            <GraduationCap className="h-4 w-4 text-amber-400" />
-            <span className="text-[11px] font-bold text-white">50+ Universities</span>
+          <div className="float-slow hidden lg:flex absolute -right-4 xl:-right-6 top-1 lg:top-4 z-20 items-center gap-2 rounded-2xl border border-amber-400/40 bg-white/95 dark:bg-[#071b31]/90 px-3.5 py-1.5 shadow-md backdrop-blur-md whitespace-nowrap text-[#102f53] dark:text-white">
+            <GraduationCap className="h-4 w-4 text-[#d29a27] dark:text-amber-400 shrink-0" />
+            <span className="text-[10px] font-bold">50+ Universities</span>
+          </div>
+
+          {/* Mobile & Tablet Responsive Stat Badges Strip */}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:hidden w-full max-w-[460px] z-20">
+            <div className="flex items-center gap-2 rounded-xl border border-[#102f53]/10 dark:border-white/15 bg-white/95 dark:bg-[#0b2542]/90 px-3 py-2 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#168f8a]/15 text-[#137a77] dark:bg-[#168f8a]/25 dark:text-[#5ed2c2] shrink-0">
+                <BookOpen className="h-4 w-4" />
+              </span>
+              <div className="text-left">
+                <strong className="block text-xs font-bold leading-tight">10,000+ Reports</strong>
+                <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6] leading-tight">Verified Academic</small>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 rounded-xl border border-[#d29a27]/30 dark:border-[#f5d778]/25 bg-white/95 dark:bg-[#0b2542]/90 px-3 py-2 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#d29a27]/15 text-[#9d7115] dark:bg-[#d29a27]/20 dark:text-[#f5d778] shrink-0">
+                <Zap className="h-4 w-4" />
+              </span>
+              <div className="text-left">
+                <strong className="block text-xs font-bold leading-tight">Instant Access</strong>
+                <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6] leading-tight">Lifetime Downloads</small>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 rounded-xl border border-amber-400/35 bg-white/95 dark:bg-[#071b31]/90 px-3 py-2 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white">
+              <GraduationCap className="h-4 w-4 text-[#d29a27] dark:text-amber-400 shrink-0" />
+              <span className="text-xs font-bold">50+ Universities</span>
+            </div>
           </div>
         </div>
 
       </div>
 
       {/* Bottom Gradient Accent Divider */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#f5d778]/50 to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#d29a27]/40 dark:via-[#f5d778]/50 to-transparent" />
     </section>
   )
 }

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ===== Design System: Bibliothèque Modern ===== */
 @theme {
   /* Colors */
@@ -46,6 +48,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .dark body {
+    background-color: #071b31;
+    color: #e2eaf1;
   }
 
   h1,
@@ -57,6 +65,15 @@
     font-family: var(--font-display);
     letter-spacing: -0.03em;
     color: #102f53;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: #ffffff;
   }
 }
 

@@ -3,6 +3,7 @@ import { Epilogue, Manrope } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from '@/components/providers/AuthProvider'
+import { ScrollToTop } from '@/components/layout/ScrollToTop'
 
 const epilogue = Epilogue({
   subsets: ['latin'],
@@ -34,9 +35,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${epilogue.variable} ${manrope.variable}`} suppressHydrationWarning>
-      <body className="font-body antialiased bg-[#fbf8f0] text-[#172b40]" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const t = localStorage.getItem('kshub_theme');
+                if (t === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="font-body antialiased bg-[#fbf8f0] text-[#172b40] dark:bg-[#071b31] dark:text-[#e2eaf1] transition-colors duration-300" suppressHydrationWarning>
         <AuthProvider>
           {children}
+          <ScrollToTop />
           <Toaster
             position="bottom-right"
             toastOptions={{

@@ -60,13 +60,42 @@ function SearchContent() {
     <>
       <Navbar />
       <main className="pt-20 min-h-screen bg-[#F9FAFB]">
-        <div className="max-w-[1280px] mx-auto px-6 py-8">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
           {q && (
-            <h1 className="text-2xl font-bold text-gray-900 mb-6">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
               Results for <span className="text-[#1D4ED8]">"{q}"</span>
-              <span className="text-base font-normal text-gray-500 ml-2">({total} documents)</span>
+              <span className="text-sm sm:text-base font-normal text-gray-500 ml-2">({total} documents)</span>
             </h1>
           )}
+
+          {/* Mobile Category Horizontal Filter Scroll */}
+          <div className="flex lg:hidden gap-2 overflow-x-auto pb-3 mb-5 scrollbar-none">
+            <button
+              onClick={() => setSelectedCategory('')}
+              className={cn(
+                'shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap',
+                !selectedCategory
+                  ? 'bg-[#102f53] text-[#f5d778] shadow-sm'
+                  : 'bg-white text-gray-700 border border-gray-200'
+              )}
+            >
+              All Categories
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(selectedCategory === cat.slug ? '' : cat.slug)}
+                className={cn(
+                  'shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap flex items-center gap-1.5',
+                  selectedCategory === cat.slug
+                    ? 'bg-[#102f53] text-[#f5d778] shadow-sm'
+                    : 'bg-white text-gray-700 border border-gray-200'
+                )}
+              >
+                <span>{cat.icon || '📄'}</span> {cat.name}
+              </button>
+            ))}
+          </div>
 
           <div className="flex gap-8">
             {/* Sidebar Filters */}
@@ -161,7 +190,7 @@ function SearchContent() {
               </div>
 
               {loading ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5">
                   {Array.from({ length: 6 }).map((_, i) => <DocumentCardSkeleton key={i} />)}
                 </div>
               ) : documents.length === 0 ? (
@@ -173,7 +202,7 @@ function SearchContent() {
               ) : (
                 <div className={cn(
                   viewMode === 'grid'
-                    ? 'grid grid-cols-2 sm:grid-cols-3 gap-5'
+                    ? 'grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5'
                     : 'flex flex-col gap-4'
                 )}>
                   {documents.map((doc) => (

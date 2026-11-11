@@ -1,22 +1,24 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { DocumentCard, DocumentCardSkeleton } from '@/components/documents/DocumentCard'
+import { ArrowRight, Flame } from 'lucide-react'
+import { DocumentCard } from '@/components/documents/DocumentCard'
+import { SAMPLE_DOCUMENTS } from '@/lib/sample-documents'
 import type { Document } from '@/types'
 
-export function TrendingSection({ documents }: { documents: Document[] }) {
+export function TrendingSection({ documents }: { documents?: Document[] }) {
+  const displayDocs = (documents && documents.length > 0) ? documents : SAMPLE_DOCUMENTS
+
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+    <section className="py-14 sm:py-20 bg-white dark:bg-[#071b31] transition-colors duration-300">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-12">
         {/* Section header */}
-        <div className="flex items-end justify-between mb-10">
+        <div className="flex items-end justify-between mb-8 sm:mb-10">
           <div>
-            <p
-              className="label-lg text-[#168f8a] mb-2"
-            >
-              Discover
-            </p>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#168f8a]/10 dark:bg-[#168f8a]/20 text-[#137a77] dark:text-[#5ed2c2] text-xs font-bold mb-2">
+              <Flame className="w-3.5 h-3.5 text-[#d29a27]" />
+              <span>Discover</span>
+            </div>
             <h2
-              className="text-3xl lg:text-4xl font-bold text-[#102f53]"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#102f53] dark:text-white"
               style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.03em' }}
             >
               Trending Now
@@ -24,33 +26,25 @@ export function TrendingSection({ documents }: { documents: Document[] }) {
           </div>
           <Link
             href="/search?sort=views"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#137a77] hover:gap-2.5 transition-all"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#137a77] dark:text-[#5ed2c2] hover:gap-2.5 transition-all"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        {/* Grid */}
-        {documents.length === 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <DocumentCardSkeleton key={i} />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {documents.map((doc) => (
-              <DocumentCard key={doc.id} document={doc} />
-            ))}
-          </div>
-        )}
+        {/* Grid of Documents */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          {displayDocs.slice(0, 8).map((doc) => (
+            <DocumentCard key={doc.id} document={doc} />
+          ))}
+        </div>
 
         {/* Mobile "see all" */}
         <div className="mt-8 flex justify-center sm:hidden">
           <Link
             href="/search?sort=views"
-            className="flex items-center gap-1.5 text-sm font-semibold text-[#137a77]"
+            className="flex items-center gap-1.5 text-sm font-semibold text-[#137a77] dark:text-[#5ed2c2]"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all trending <ArrowRight className="w-4 h-4" />

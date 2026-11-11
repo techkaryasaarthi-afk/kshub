@@ -9,6 +9,7 @@ import { useAuthStore } from '@/store/authStore'
 import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
 import type { Category } from '@/types'
+import { ThemeToggle } from '@/components/layout/ThemeToggle'
 
 interface SubCategorySection {
   title: string
@@ -178,6 +179,17 @@ export function Navbar() {
   }
 
   useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
+  useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setUserMenuOpen(false)
@@ -190,17 +202,17 @@ export function Navbar() {
   return (
     <>
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-gray-100 py-1' 
-            : 'bg-[#FAF9F7]/90 backdrop-blur-sm border-b border-[rgba(190,200,202,0.2)] py-2.5'
+            ? 'bg-white/95 dark:bg-[#071b31]/95 backdrop-blur-md shadow-md border-b border-gray-100 dark:border-white/10 py-1' 
+            : 'bg-[#FAF9F7]/90 dark:bg-[#071b31]/90 backdrop-blur-sm border-b border-[rgba(190,200,202,0.2)] dark:border-white/10 py-2 sm:py-2.5'
         }`}
       >
         {/* Top bar */}
-        <div className="max-w-[1280px] mx-auto px-6 h-14 flex items-center gap-6">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3 sm:gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0 mr-2 group">
-            <span className="relative h-11 w-11 rounded-xl overflow-hidden border-2 border-[#d29a27]/80 bg-white p-0.5 shadow-md shadow-[#d29a27]/15 group-hover:scale-105 group-hover:border-[#d29a27] transition-all duration-300">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group">
+            <span className="relative h-9 w-9 sm:h-11 sm:w-11 rounded-xl overflow-hidden border-2 border-[#d29a27]/80 bg-white p-0.5 shadow-md shadow-[#d29a27]/15 group-hover:scale-105 group-hover:border-[#d29a27] transition-all duration-300">
               <Image
                 src="/karya-saarthi-logo.jpg"
                 alt="Karya Saarthi Logo"
@@ -211,10 +223,10 @@ export function Navbar() {
               />
             </span>
             <div className="flex flex-col">
-              <span className="font-display text-xl font-extrabold text-[#102f53] tracking-tight group-hover:text-[#168f8a] transition-colors leading-none" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
+              <span className="font-display text-lg sm:text-xl font-extrabold text-[#102f53] dark:text-white tracking-tight group-hover:text-[#168f8a] transition-colors leading-none" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
                 KSHub
               </span>
-              <span className="text-[9px] uppercase tracking-wider font-bold text-[#d29a27] mt-0.5 font-mono">
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-wider font-bold text-[#d29a27] mt-0.5 font-mono">
                 By Karya Saarthi
               </span>
             </div>
@@ -228,8 +240,8 @@ export function Navbar() {
                 onMouseEnter={() => handleMouseEnter(parent.name)}
                 className={`flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13px] font-semibold transition-all whitespace-nowrap ${
                   activeMenu === parent.name
-                    ? 'bg-[#1D4ED8]/10 text-[#0F2C59]'
-                    : 'text-[#3F484A] hover:text-[#1A1C1B] hover:bg-[#EFEEEC]'
+                    ? 'bg-[#1D4ED8]/10 text-[#0F2C59] dark:bg-white/10 dark:text-white'
+                    : 'text-[#3F484A] dark:text-[#c2d1df] hover:text-[#1A1C1B] dark:hover:text-white hover:bg-[#EFEEEC] dark:hover:bg-white/10'
                 }`}
                 style={{ fontFamily: 'var(--font-manrope)' }}
               >
@@ -239,7 +251,7 @@ export function Navbar() {
             ))}
             <Link
               href="/search"
-              className="flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13px] font-semibold text-[#3F484A] hover:text-[#1A1C1B] hover:bg-[#EFEEEC] transition-all whitespace-nowrap"
+              className="flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13px] font-semibold text-[#3F484A] dark:text-[#c2d1df] hover:text-[#1A1C1B] dark:hover:text-white hover:bg-[#EFEEEC] dark:hover:bg-white/10 transition-all whitespace-nowrap"
               style={{ fontFamily: 'var(--font-manrope)' }}
             >
               All Documents
@@ -323,13 +335,17 @@ export function Navbar() {
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Search icon — desktop */}
+          {/* Search icon — all screens */}
           <button
             onClick={() => setSearchOpen(true)}
-            className="hidden md:flex p-2.5 rounded-xl hover:bg-[#EFEEEC] transition-colors text-[#3F484A]"
+            className="flex p-2 sm:p-2.5 rounded-xl hover:bg-[#EFEEEC] dark:hover:bg-white/10 transition-colors text-[#3F484A] dark:text-[#c2d1df]"
+            aria-label="Open search"
           >
             <Search className="w-4 h-4" />
           </button>
+
+          {/* Theme Toggle Button (Light / Dark Mode) */}
+          <ThemeToggle />
 
           {/* Upload — desktop */}
           <Link
@@ -470,14 +486,14 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-white overflow-y-auto">
-          <div className="flex items-center justify-between px-6 h-16 border-b border-[#EFEEEC]">
+        <div className="fixed inset-0 z-[60] bg-white dark:bg-[#071b31] text-[#102f53] dark:text-white overflow-y-auto">
+          <div className="flex items-center justify-between px-6 h-16 border-b border-[#EFEEEC] dark:border-white/10">
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2.5">
               <span className="relative h-10 w-10 rounded-xl overflow-hidden border-2 border-[#d29a27]/80 bg-white p-0.5 shadow-sm">
                 <Image src="/karya-saarthi-logo.jpg" alt="Karya Saarthi Logo" width={128} height={128} className="h-full w-full object-contain" />
               </span>
               <div className="flex flex-col">
-                <span className="font-display text-xl font-extrabold text-[#102f53]" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
+                <span className="font-display text-xl font-extrabold text-[#102f53] dark:text-white" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
                   KSHub
                 </span>
                 <span className="text-[8px] uppercase tracking-wider font-bold text-[#d29a27] font-mono">
@@ -485,9 +501,12 @@ export function Navbar() {
                 </span>
               </div>
             </Link>
-            <button onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-xl hover:bg-[#F4F3F1]">
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <button onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-xl hover:bg-[#F4F3F1] dark:hover:bg-white/10" aria-label="Close menu">
+                <X className="w-5 h-5 dark:text-white" />
+              </button>
+            </div>
           </div>
           <div className="px-6 py-6 space-y-6">
             <form onSubmit={handleSearch} className="flex items-center gap-3 px-4 py-3 bg-[#F4F3F1] rounded-xl">

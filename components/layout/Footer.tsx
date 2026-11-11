@@ -66,8 +66,8 @@ export function Footer() {
       {/* Top golden shimmer accent line */}
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#f5d778] to-transparent opacity-80" />
 
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-12 py-16 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10 mb-12 sm:mb-16">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3.5 group">

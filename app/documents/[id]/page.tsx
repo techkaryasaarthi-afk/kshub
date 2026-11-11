@@ -167,7 +167,7 @@ export default function DocumentPage() {
     <>
       <Navbar />
       <main className="pt-20 min-h-screen bg-[#F9FAFB]">
-        <div className="max-w-[1280px] mx-auto px-6 py-8">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* PDF Viewer */}
             <div className="lg:col-span-2">

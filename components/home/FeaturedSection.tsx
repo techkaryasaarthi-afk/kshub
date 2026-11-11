@@ -1,20 +1,24 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 import { DocumentCard } from '@/components/documents/DocumentCard'
+import { SAMPLE_DOCUMENTS } from '@/lib/sample-documents'
 import type { Document } from '@/types'
 
-export function FeaturedSection({ documents }: { documents: Document[] }) {
-  if (documents.length === 0) return null
+export function FeaturedSection({ documents }: { documents?: Document[] }) {
+  const displayDocs = (documents && documents.length > 0) ? documents : [...SAMPLE_DOCUMENTS].reverse()
 
   return (
-    <section className="py-20 bg-[#f5f0e5]">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+    <section className="py-14 sm:py-20 bg-[#f7f2e6] dark:bg-[#09223e] transition-colors duration-300">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-12">
         {/* Section header */}
-        <div className="flex items-end justify-between mb-10">
+        <div className="flex items-end justify-between mb-8 sm:mb-10">
           <div>
-            <p className="label-lg text-[#168f8a] mb-2">Community</p>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#168f8a]/10 dark:bg-[#168f8a]/20 text-[#137a77] dark:text-[#5ed2c2] text-xs font-bold mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#d29a27]" />
+              <span>Community</span>
+            </div>
             <h2
-              className="text-3xl lg:text-4xl font-bold text-[#102f53]"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#102f53] dark:text-white"
               style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.03em' }}
             >
               Recently Added
@@ -22,15 +26,15 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
           </div>
           <Link
             href="/search?sort=newest"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#137a77] hover:gap-2.5 transition-all"
+            className="hidden sm:flex items-center gap-1.5 text-sm font-semibold text-[#137a77] dark:text-[#5ed2c2] hover:gap-2.5 transition-all"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 lg:gap-6">
-          {documents.map((doc) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          {displayDocs.slice(0, 8).map((doc) => (
             <DocumentCard key={doc.id} document={doc} />
           ))}
         </div>
@@ -39,7 +43,7 @@ export function FeaturedSection({ documents }: { documents: Document[] }) {
         <div className="mt-8 flex justify-center sm:hidden">
           <Link
             href="/search?sort=newest"
-            className="flex items-center gap-1.5 text-sm font-semibold text-[#137a77]"
+            className="flex items-center gap-1.5 text-sm font-semibold text-[#137a77] dark:text-[#5ed2c2]"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             See all recent <ArrowRight className="w-4 h-4" />

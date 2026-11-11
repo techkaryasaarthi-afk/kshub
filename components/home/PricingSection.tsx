@@ -59,18 +59,17 @@ const PLANS = [
   {
     name: 'Corporate License',
     price: 'Custom',
-    period: 'volume pricing',
-    tagline: '5–100 users for teams/institutions',
+    period: 'per team',
+    tagline: 'For institutions & research labs',
     features: [
-      'Team-wide document access',
+      'Multi-seat library access',
       'Dedicated account manager',
-      'API + LMS integration',
-      'Custom content sourcing',
-      'Training & onboarding',
-      'Invoice & GST billing',
+      'Custom API integrations',
+      'Institutional SLA',
+      'Bulk licensing discounts',
     ],
     cta: 'Contact Sales',
-    ctaHref: 'mailto:operations@karyasaarthi.in?subject=KSHub Corporate License Inquiry',
+    ctaHref: '/contact',
     highlight: false,
     badge: null,
   },
@@ -80,19 +79,19 @@ export function PricingSection() {
   const { isPremium } = useAuthStore()
 
   return (
-    <section className="py-20 bg-[#fbf8f0]">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
+    <section className="py-14 sm:py-20 bg-[#fbf8f0] dark:bg-[#071b31] transition-colors duration-300">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="label-lg text-[#168f8a] mb-3">Simple, honest pricing</p>
+        <div className="text-center mb-10 sm:mb-16">
+          <p className="label-lg text-[#168f8a] dark:text-[#5ed2c2] mb-2 sm:mb-3">Simple, honest pricing</p>
           <h2
-            className="text-4xl lg:text-5xl font-extrabold text-[#102f53] mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#102f53] dark:text-white mb-3 sm:mb-4"
             style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}
           >
             Choose your plan
           </h2>
           <p
-            className="text-lg text-[#516273] max-w-[480px] mx-auto"
+            className="text-sm sm:text-base lg:text-lg text-[#516273] dark:text-[#c2d1df] max-w-[480px] mx-auto font-medium"
             style={{ fontFamily: 'var(--font-manrope)' }}
           >
             Honest pricing with no hidden fees. Choose the option that fits your learning needs.
@@ -107,7 +106,7 @@ export function PricingSection() {
               className={`relative rounded-3xl p-7 flex flex-col min-w-0 transition-all duration-300 hover:-translate-y-2.5 ${
                 plan.highlight
                   ? 'bg-gradient-to-br from-[#071b31] via-[#102f53] to-[#168f8a] text-white shadow-[0_28px_70px_rgba(16,47,83,0.35)] ring-2 ring-[#f5d778] hover:shadow-[0_36px_85px_rgba(210,154,39,0.35)]'
-                  : 'bg-white shadow-[0_10px_32px_rgba(16,47,83,0.06)] border border-[#102f53]/[0.09] hover:border-[#d29a27]/60 hover:shadow-[0_20px_45px_rgba(16,47,83,0.14)]'
+                  : 'bg-white dark:bg-[#0b2542] shadow-[0_10px_32px_rgba(16,47,83,0.06)] dark:shadow-[0_10px_32px_rgba(0,0,0,0.35)] border border-[#102f53]/[0.09] dark:border-white/10 hover:border-[#d29a27]/60 dark:hover:border-[#f5d778] hover:shadow-[0_20px_45px_rgba(16,47,83,0.14)]'
               }`}
             >
               {/* Badge chip */}
@@ -128,7 +127,7 @@ export function PricingSection() {
               <div className="mb-6">
                 <h3
                   className={`text-xs font-bold mb-3 uppercase tracking-wider ${
-                    plan.highlight ? 'text-[#f5d778]' : 'text-[#168f8a]'
+                    plan.highlight ? 'text-[#f5d778]' : 'text-[#168f8a] dark:text-[#5ed2c2]'
                   }`}
                   style={{ fontFamily: 'var(--font-manrope)' }}
                 >
@@ -137,7 +136,7 @@ export function PricingSection() {
                 <div className="flex items-baseline gap-1.5 mb-2">
                   <span
                     className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${
-                      plan.highlight ? 'text-white' : 'text-[#102f53]'
+                      plan.highlight ? 'text-white' : 'text-[#102f53] dark:text-white'
                     }`}
                     style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}
                   >
@@ -145,7 +144,7 @@ export function PricingSection() {
                   </span>
                   <span
                     className={`text-xs font-medium ${
-                      plan.highlight ? 'text-[#c2d1df]' : 'text-[#6F797A]'
+                      plan.highlight ? 'text-[#c2d1df]' : 'text-[#6F797A] dark:text-[#a0b0bf]'
                     }`}
                     style={{ fontFamily: 'var(--font-manrope)' }}
                   >
@@ -154,7 +153,7 @@ export function PricingSection() {
                 </div>
                 <p
                   className={`text-xs leading-relaxed font-medium ${
-                    plan.highlight ? 'text-[#c2d1df]' : 'text-[#6F797A]'
+                    plan.highlight ? 'text-[#c2d1df]' : 'text-[#6F797A] dark:text-[#a0b0bf]'
                   }`}
                   style={{ fontFamily: 'var(--font-manrope)' }}
                 >
@@ -172,13 +171,13 @@ export function PricingSection() {
                   >
                     <div
                       className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                        plan.highlight ? 'bg-[#f5d778]/25 text-[#f5d778]' : 'bg-[#168f8a]/10 text-[#168f8a]'
+                        plan.highlight ? 'bg-[#f5d778]/25 text-[#f5d778]' : 'bg-[#168f8a]/10 dark:bg-[#168f8a]/20 text-[#168f8a] dark:text-[#5ed2c2]'
                       }`}
                     >
                       <Check className="w-2.5 h-2.5" />
                     </div>
                     <span
-                      className={`font-medium ${plan.highlight ? 'text-[#f1f5f9]' : 'text-[#3F484A]'}`}
+                      className={`font-medium ${plan.highlight ? 'text-[#f1f5f9]' : 'text-[#3F484A] dark:text-[#c2d1df]'}`}
                     >
                       {f}
                     </span>
@@ -193,7 +192,7 @@ export function PricingSection() {
                   plan.highlight
                     ? 'bg-gradient-to-r from-[#f5d778] via-[#e5b84d] to-[#f0d488] text-[#102f53] hover:shadow-xl hover:shadow-[#d29a27]/30 hover:-translate-y-0.5'
                     : plan.name === 'Single Document'
-                    ? 'border-2 border-[#102f53]/15 text-[#102f53] hover:border-[#168f8a] hover:bg-[#168f8a]/5'
+                    ? 'border-2 border-[#102f53]/15 dark:border-white/20 text-[#102f53] dark:text-white hover:border-[#168f8a] hover:bg-[#168f8a]/5'
                     : 'bg-[#102f53] text-white hover:bg-[#168f8a] shadow-md hover:shadow-lg'
                 }`}
                 style={{ fontFamily: 'var(--font-manrope)' }}
@@ -207,7 +206,7 @@ export function PricingSection() {
         </div>
 
         <p
-          className="text-center text-sm text-[#6F797A] mt-10"
+          className="text-center text-sm text-[#6F797A] dark:text-[#a0b0bf] mt-10"
           style={{ fontFamily: 'var(--font-manrope)' }}
         >
           Secure payment gateway integrations. Cancel subscriptions anytime.
