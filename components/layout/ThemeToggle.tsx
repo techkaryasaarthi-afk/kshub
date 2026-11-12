@@ -3,61 +3,111 @@
 import { useState, useEffect } from 'react'
 import { Sun, Moon } from 'lucide-react'
 
+/**
+ * ==============================================================================
+ * KSHub - Dual-Segment Theme Switcher Component
+ * ==============================================================================
+ * Features:
+ * - Dual-Segment Pill Switcher (☀️ Light | 🌙 Dark)
+ * - Crystal-clear visual indication of which theme is active
+ * - Direct click action: Clicking 'Light' activates Light Theme; 'Dark' activates Dark Theme
+ * - Direct DOM manipulation of document.documentElement.classList ('dark')
+ * - localStorage persistence ('kshub_theme')
+ * - Multi-device responsive (icons always visible, labels visible on xs/sm+)
+ * ==============================================================================
+ */
+
 export function ThemeToggle({ className = '' }: { className?: string }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-    const saved = localStorage.getItem('kshub_theme') as 'light' | 'dark' | null
-    if (saved === 'dark') {
-      setTheme('dark')
-      document.documentElement.classList.add('dark')
-    } else {
-      setTheme('light')
-      document.documentElement.classList.remove('dark')
-    }
-  }, [])
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(nextTheme)
-    localStorage.setItem('kshub_theme', nextTheme)
-    if (nextTheme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
+  const applyTheme = (targetTheme: 'light' | 'dark') => {
+    setTheme(targetTheme)
+    try {
+      localStorage.setItem('kshub_theme', targetTheme)
+      if (targetTheme === 'dark') {
+        document.documentElement.classList.add('dark')
+        document.body.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+        document.body.classList.remove('dark')
+      }
+      window.dispatchEvent(new Event('theme-change'))
+    } catch (e) {
+      console.error('Failed to apply theme:', e)
     }
   }
 
+  useEffect(() => {
+    setMounted(true)
+    try {
+      const saved = localStorage.getItem('kshub_theme') as 'light' | 'dark' | null
+      if (saved === 'dark') {
+        applyTheme('dark')
+      } else {
+        applyTheme('light')
+      }
+    } catch {
+      applyTheme('light')
+    }
+  }, [])
+
   if (!mounted) {
     return (
-      <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#102f53]/15 bg-white/80 text-xs text-[#102f53] ${className}`}>
-        <Moon className="w-3.5 h-3.5 text-[#102f53]" />
-        <span className="font-semibold text-[11px] hidden sm:inline">Theme</span>
+      <div className={`inline-flex items-center p-1 rounded-full border border-[#102f53]/15 bg-white/90 text-xs shadow-xs ${className}`}>
+        <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#102f53] text-[#f5d778] font-bold text-[11px]">
+          <Sun className="w-3.5 h-3.5 text-[#f5d778]" />
+          <span>Light</span>
+        </span>
+        <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[#87939c] font-bold text-[11px]">
+          <Moon className="w-3.5 h-3.5" />
+          <span>Dark</span>
+        </span>
       </div>
     )
   }
 
   return (
-    <button
-      type="button"
-      onClick={toggleTheme}
-      className={`relative inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#102f53]/15 dark:border-white/20 bg-white/90 dark:bg-white/10 hover:border-[#d29a27] dark:hover:border-[#f5d778] text-[#102f53] dark:text-[#f5d778] shadow-xs transition-all duration-300 hover:scale-105 cursor-pointer backdrop-blur-md ${className}`}
-      aria-label={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-      title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+    <div
+      className={`inline-flex items-center p-0.5 sm:p-1 rounded-full border-2 transition-all duration-300 shadow-sm ${
+        theme === 'dark'
+          ? 'border-[#f5d778]/50 bg-[#071b31]/95 shadow-[0_0_15px_rgba(245,215,120,0.2)]'
+          : 'border-[#102f53]/25 bg-white/95 shadow-md shadow-[#102f53]/10'
+      } ${className}`}
+      role="group"
+      aria-label="Theme Switcher"
     >
-      {theme === 'light' ? (
-        <>
-          <Moon className="w-3.5 h-3.5 text-[#102f53] transition-transform duration-300 group-hover:rotate-12" />
-          <span className="text-[11px] font-bold text-[#102f53] tracking-wide hidden sm:inline">Dark</span>
-        </>
-      ) : (
-        <>
-          <Sun className="w-3.5 h-3.5 text-[#f5d778] transition-transform duration-300 group-hover:rotate-45" />
-          <span className="text-[11px] font-bold text-[#f5d778] tracking-wide hidden sm:inline">Light</span>
-        </>
-      )}
-    </button>
+      {/* Light Option Button */}
+      <button
+        type="button"
+        onClick={() => applyTheme('light')}
+        className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none ${
+          theme === 'light'
+            ? 'bg-[#102f53] text-[#f5d778] shadow-md scale-100 ring-1 ring-[#d29a27]/30'
+            : 'text-[#87939c] hover:text-[#102f53] dark:text-[#9cb1c5] dark:hover:text-white'
+        }`}
+        title="Switch to Light Theme"
+        aria-pressed={theme === 'light'}
+      >
+        <Sun className={`w-3.5 h-3.5 ${theme === 'light' ? 'text-[#f5d778]' : 'text-current'}`} />
+        <span>Light</span>
+      </button>
+
+      {/* Dark Option Button */}
+      <button
+        type="button"
+        onClick={() => applyTheme('dark')}
+        className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none ${
+          theme === 'dark'
+            ? 'bg-[#d29a27] text-[#071b31] shadow-md shadow-[#d29a27]/30 scale-100 font-extrabold ring-1 ring-[#f5d778]/50'
+            : 'text-[#87939c] hover:text-[#102f53] dark:text-[#9cb1c5] dark:hover:text-[#f5d778]'
+        }`}
+        title="Switch to Dark Theme"
+        aria-pressed={theme === 'dark'}
+      >
+        <Moon className={`w-3.5 h-3.5 ${theme === 'dark' ? 'text-[#071b31] fill-[#071b31]' : 'text-current'}`} />
+        <span>Dark</span>
+      </button>
+    </div>
   )
 }
