@@ -1,3 +1,19 @@
+/**
+ * ==============================================================================
+ * KSHub - Navbar Component
+ * ==============================================================================
+ * Key Features:
+ * 1. Mega-menu Navigation with all primary categories in bold:
+ *    - Academic, Professional, Culture, Personal Growth, All Documents (font-bold)
+ * 2. Dedicated Action Buttons with Light & Dark Theme Styling:
+ *    - Upload: Rich teal gradient pill button with active click depth
+ *    - Log in: 2px bordered navy/frosted pill button with user icon and hover/active color shifts
+ *    - Start Free Trial: Gold brand gradient button
+ * 3. Theme Toggle Button (Light & Dark Theme Switcher)
+ * 4. Responsive Mobile Drawer with bold stream navigation & quick actions
+ * ==============================================================================
+ */
+
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
@@ -452,9 +468,10 @@ export function Navbar() {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 rounded-xl hover:bg-[#EFEEEC] transition-colors"
+            className="lg:hidden p-2 rounded-xl hover:bg-[#EFEEEC] dark:hover:bg-white/10 transition-colors text-[#102f53] dark:text-white"
+            aria-label="Open navigation menu"
           >
-            <Menu className="w-5 h-5 text-[#1A1C1B]" />
+            <Menu className="w-5 h-5" />
           </button>
         </div>
       </nav>
@@ -533,18 +550,30 @@ export function Navbar() {
                 style={{ fontFamily: 'var(--font-manrope)' }}
               />
             </form>
+            {/* Mobile Navigation Categories in Bold */}
             <div className="space-y-1">
-              {categories.map((cat) => (
+              <p className="px-4 text-[11px] font-bold uppercase tracking-wider text-[#d29a27] font-mono">
+                Knowledge Streams
+              </p>
+              {PARENT_CATEGORIES.map((cat) => (
                 <Link
-                  key={cat.id}
-                  href={`/search?category=${cat.slug}`}
+                  key={cat.name}
+                  href={`/search?parent=${encodeURIComponent(cat.name)}`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#F4F3F1] text-sm font-semibold text-[#1A1C1B]"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#F4F3F1] dark:hover:bg-white/10 text-sm font-bold text-[#102f53] dark:text-white transition-colors"
                   style={{ fontFamily: 'var(--font-manrope)' }}
                 >
-                  <span>{cat.icon || '📄'}</span> {cat.name}
+                  <span className="text-base">{cat.icon}</span> {cat.name}
                 </Link>
               ))}
+              <Link
+                href="/search"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#F4F3F1] dark:hover:bg-white/10 text-sm font-bold text-[#168f8a] dark:text-[#5ed2c2] transition-colors"
+                style={{ fontFamily: 'var(--font-manrope)' }}
+              >
+                <span>📚</span> All Documents
+              </Link>
             </div>
             <div className="pt-4 border-t border-[#EFEEEC] dark:border-white/10 space-y-2.5">
               <Link

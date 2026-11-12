@@ -1,3 +1,21 @@
+/**
+ * ==============================================================================
+ * KSHub - HeroSection Component (Features #4 & Responsive Overhaul)
+ * ==============================================================================
+ * Key Implementation Highlights:
+ * 1. Full 16:9 Widescreen Video Showcase:
+ *    - Container maintains precise aspect-[16/9] with zero cropping of video text or emblem.
+ *    - Dual-layer watermark concealment: bottom-right dark gradient + brand pill badge ("KSHub • HD")
+ *      completely covers third-party Gemini watermarks.
+ * 2. Responsive Multi-device Layout:
+ *    - Designed for iPhone, iPad, MacBook, and large desktop screens.
+ *    - Floating badges positioned with responsive coordinates to eliminate overlap.
+ * 3. Brand Light & Dark Themes:
+ *    - Default Light Theme: Warm cream background (#fbf8f0), Royal Navy (#102f53), Gold (#d29a27), Teal (#168f8a).
+ *    - Smooth transitions with full Dark Mode support (#071b31).
+ * ==============================================================================
+ */
+
 'use client'
 
 import Link from 'next/link'
