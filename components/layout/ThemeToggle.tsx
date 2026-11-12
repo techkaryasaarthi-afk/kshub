@@ -81,7 +81,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
       <button
         type="button"
         onClick={() => applyTheme('light')}
-        className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none ${
+        className={`flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10.5px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none ${
           theme === 'light'
             ? 'bg-[#102f53] text-[#f5d778] shadow-md scale-100 ring-1 ring-[#d29a27]/30'
             : 'text-[#87939c] hover:text-[#102f53] dark:text-[#9cb1c5] dark:hover:text-white'
@@ -89,7 +89,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
         title="Switch to Light Theme"
         aria-pressed={theme === 'light'}
       >
-        <Sun className={`w-3.5 h-3.5 ${theme === 'light' ? 'text-[#f5d778]' : 'text-current'}`} />
+        <Sun className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${theme === 'light' ? 'text-[#f5d778]' : 'text-current'}`} />
         <span>Light</span>
       </button>
 
@@ -97,7 +97,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
       <button
         type="button"
         onClick={() => applyTheme('dark')}
-        className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none ${
+        className={`flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10.5px] sm:text-xs font-bold transition-all duration-200 cursor-pointer select-none ${
           theme === 'dark'
             ? 'bg-[#d29a27] text-[#071b31] shadow-md shadow-[#d29a27]/30 scale-100 font-extrabold ring-1 ring-[#f5d778]/50'
             : 'text-[#87939c] hover:text-[#102f53] dark:text-[#9cb1c5] dark:hover:text-[#f5d778]'
@@ -105,7 +105,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
         title="Switch to Dark Theme"
         aria-pressed={theme === 'dark'}
       >
-        <Moon className={`w-3.5 h-3.5 ${theme === 'dark' ? 'text-[#071b31] fill-[#071b31]' : 'text-current'}`} />
+        <Moon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${theme === 'dark' ? 'text-[#071b31] fill-[#071b31]' : 'text-current'}`} />
         <span>Dark</span>
       </button>
     </div>

@@ -180,18 +180,36 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Right Column: Full Widescreen 16:9 Video Showcase with Watermark Concealment */}
-        <div className="relative mx-auto flex w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[580px] xl:max-w-[620px] flex-col items-center justify-center min-h-[340px] sm:min-h-[400px] lg:min-h-[460px]">
-          {/* Dual Orbiting Rings */}
-          <div className="brand-orbit absolute pointer-events-none h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] lg:h-[480px] lg:w-[480px] rounded-full border border-dashed border-[#d29a27]/30 dark:border-[#f5d778]/30" />
-          <div className="brand-orbit-reverse absolute pointer-events-none h-[260px] w-[260px] sm:h-[350px] sm:w-[350px] lg:h-[430px] lg:w-[430px] rounded-full border border-dashed border-[#168f8a]/30 dark:border-[#168f8a]/30" />
-          <div className="absolute pointer-events-none h-[240px] w-[240px] sm:h-[340px] sm:w-[340px] lg:h-[400px] lg:w-[400px] rounded-full bg-[radial-gradient(circle,rgba(210,154,39,.18),rgba(11,37,66,0)_70%)] dark:bg-[radial-gradient(circle,rgba(210,154,39,.24),rgba(11,37,66,0)_70%)]" />
+        {/* Right Column: Full Widescreen 16:9 Video Showcase with Clean, Non-overlapping Stats */}
+        <div className="relative mx-auto flex w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px] xl:max-w-[600px] flex-col items-center justify-center">
+          {/* Dual Orbiting Rings (Background Ambient Decor) */}
+          <div className="brand-orbit absolute pointer-events-none h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] lg:h-[460px] lg:w-[460px] rounded-full border border-dashed border-[#d29a27]/30 dark:border-[#f5d778]/30" />
+          <div className="brand-orbit-reverse absolute pointer-events-none h-[260px] w-[260px] sm:h-[350px] sm:w-[350px] lg:h-[410px] lg:w-[410px] rounded-full border border-dashed border-[#168f8a]/30 dark:border-[#168f8a]/30" />
+          <div className="absolute pointer-events-none h-[240px] w-[240px] sm:h-[340px] sm:w-[340px] lg:h-[380px] lg:w-[380px] rounded-full bg-[radial-gradient(circle,rgba(210,154,39,.18),rgba(11,37,66,0)_70%)] dark:bg-[radial-gradient(circle,rgba(210,154,39,.24),rgba(11,37,66,0)_70%)]" />
 
-          {/* Central 16:9 Video Showcase Card - Complete Video Visibility */}
-          <div className="float-slow glow-aura-gold relative z-10 w-full max-w-[340px] xs:max-w-[400px] sm:max-w-[460px] md:max-w-[500px] lg:max-w-[530px] xl:max-w-[570px] overflow-hidden rounded-[26px] sm:rounded-[32px] border-2 border-[#d29a27]/70 bg-gradient-to-b from-white via-white to-amber-50/95 dark:from-[#0b2542] dark:via-[#09223e] dark:to-[#071b31] p-3 sm:p-4 shadow-[0_24px_70px_rgba(16,47,83,0.14)] dark:shadow-[0_24px_70px_rgba(0,0,0,.55)] group transition-transform duration-500 hover:scale-[1.02]">
+          {/* Top Stat Pills Strip — Resting Safely Above Video Frame (ZERO OVERLAP) */}
+          <div className="w-full flex items-center justify-between gap-2 mb-3 z-20 px-1 sm:px-2">
+            <div className="inline-flex items-center gap-2 rounded-2xl border border-[#168f8a]/20 dark:border-[#168f8a]/30 bg-white/95 dark:bg-[#0b2542]/95 px-3 sm:px-3.5 py-1.5 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white transition-all hover:scale-105">
+              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#168f8a]/15 text-[#137a77] dark:bg-[#168f8a]/25 dark:text-[#5ed2c2] shrink-0">
+                <BookOpen className="h-3.5 w-3.5" />
+              </span>
+              <div className="text-left">
+                <strong className="block text-[11px] sm:text-xs font-bold leading-tight">10,000+ Verified Reports</strong>
+                <small className="text-[9px] sm:text-[10px] text-[#516273] dark:text-[#b8c7d6] leading-none hidden xs:inline">Read · Download · Learn</small>
+              </div>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 rounded-2xl border border-[#d29a27]/35 dark:border-[#f5d778]/35 bg-white/95 dark:bg-[#0b2542]/95 px-3 py-1.5 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white transition-all hover:scale-105">
+              <GraduationCap className="h-4 w-4 text-[#d29a27] dark:text-[#f5d778] shrink-0" />
+              <span className="text-[11px] sm:text-xs font-bold whitespace-nowrap">50+ Universities</span>
+            </div>
+          </div>
+
+          {/* Central 16:9 Video Showcase Card - 100% Video Visibility with Zero Overlapping Badges */}
+          <div className="glow-aura-gold relative z-10 w-full overflow-hidden rounded-[24px] sm:rounded-[30px] border-2 border-[#d29a27]/70 bg-gradient-to-b from-white via-white to-amber-50/95 dark:from-[#0b2542] dark:via-[#09223e] dark:to-[#071b31] p-2.5 sm:p-3.5 shadow-[0_24px_70px_rgba(16,47,83,0.14)] dark:shadow-[0_24px_70px_rgba(0,0,0,.55)] group transition-transform duration-500 hover:scale-[1.01]">
             
             {/* 16:9 Video Container: Displays the entire video without side cropping */}
-            <div className="relative aspect-[16/9] w-full rounded-[18px] sm:rounded-[24px] overflow-hidden bg-[#071b31] shadow-inner flex items-center justify-center">
+            <div className="relative aspect-[16/9] w-full rounded-[16px] sm:rounded-[22px] overflow-hidden bg-[#071b31] shadow-inner flex items-center justify-center">
               <video
                 src="/karya-saarthi-hero.mp4"
                 autoPlay
@@ -200,7 +218,7 @@ export function HeroSection() {
                 playsInline
                 preload="auto"
                 poster="/karya-saarthi-logo.jpg"
-                className="h-full w-full object-cover scale-[1.02] rounded-[18px] sm:rounded-[24px] pointer-events-none select-none transition-transform duration-700"
+                className="h-full w-full object-cover scale-[1.02] rounded-[16px] sm:rounded-[22px] pointer-events-none select-none transition-transform duration-700"
               />
 
               {/* Bottom-right corner dark gradient specifically targeting the watermark location */}
@@ -221,11 +239,11 @@ export function HeroSection() {
               </div>
 
               {/* Inner ambient ring */}
-              <div className="pointer-events-none absolute inset-0 rounded-[18px] sm:rounded-[24px] ring-1 ring-inset ring-white/10" />
+              <div className="pointer-events-none absolute inset-0 rounded-[16px] sm:rounded-[22px] ring-1 ring-inset ring-white/10" />
             </div>
             
             {/* Card Bottom Label Bar */}
-            <div className="mt-2.5 sm:mt-3 flex items-center justify-between gap-3 rounded-2xl border border-[#d29a27]/30 bg-gradient-to-r from-[#102f53] via-[#0d2745] to-[#168f8a] px-3.5 sm:px-4 py-2 sm:py-2.5 text-white shadow-md">
+            <div className="mt-2 sm:mt-2.5 flex items-center justify-between gap-3 rounded-xl sm:rounded-2xl border border-[#d29a27]/30 bg-gradient-to-r from-[#102f53] via-[#0d2745] to-[#168f8a] px-3 sm:px-4 py-2 sm:py-2.5 text-white shadow-md">
               <div className="flex items-center gap-2 min-w-0">
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-white/10 border border-[#f5d778]/30">
                   <Sparkles className="h-3.5 w-3.5 text-[#f5d778]" />
@@ -245,60 +263,16 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Desktop/MacBook Floating Badges (Visible on lg: & xl: screens with safe margins — ZERO overlap) */}
-          {/* Floating Badge 1: Top-Left */}
-          <div className="float-delay hidden lg:flex absolute -left-8 xl:-left-12 -top-2 lg:top-2 z-20 items-center gap-3 rounded-2xl border border-[#102f53]/10 dark:border-white/20 bg-white/95 dark:bg-[#0b2542]/90 px-4 py-2.5 shadow-[0_16px_36px_rgba(16,47,83,0.09)] dark:shadow-[0_20px_45px_rgba(0,0,0,.35)] backdrop-blur-md hover:scale-105 transition-transform whitespace-nowrap text-[#102f53] dark:text-white">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#168f8a]/15 text-[#137a77] dark:bg-[#168f8a]/25 dark:text-[#5ed2c2] shrink-0">
-              <BookOpen className="h-4 w-4" />
-            </span>
-            <span>
-              <strong className="block text-xs font-bold">10,000+ Verified Reports</strong>
-              <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6]">Read · Download · Learn</small>
-            </span>
-          </div>
-
-          {/* Floating Badge 2: Bottom-Right */}
-          <div className="float-reverse hidden lg:flex absolute -right-6 xl:-right-10 -bottom-2 lg:bottom-2 z-20 items-center gap-3 rounded-2xl border border-[#d29a27]/30 bg-white/95 dark:bg-[#0b2542]/95 px-4 py-2.5 shadow-[0_16px_36px_rgba(16,47,83,0.09)] dark:shadow-[0_20px_45px_rgba(0,0,0,.35)] backdrop-blur-md hover:scale-105 transition-transform whitespace-nowrap text-[#102f53] dark:text-white">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#d29a27]/15 text-[#9d7115] dark:bg-[#d29a27]/20 dark:text-[#f5d778] shrink-0">
-              <Zap className="h-4 w-4" />
-            </span>
-            <span>
-              <strong className="block text-xs font-bold">Instant Downloads</strong>
-              <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6]">Lifetime Digital Access</small>
-            </span>
-          </div>
-
-          {/* Floating Badge 3: Top-Right */}
-          <div className="float-slow hidden lg:flex absolute -right-4 xl:-right-6 top-1 lg:top-4 z-20 items-center gap-2 rounded-2xl border border-amber-400/40 bg-white/95 dark:bg-[#071b31]/90 px-3.5 py-1.5 shadow-md backdrop-blur-md whitespace-nowrap text-[#102f53] dark:text-white">
-            <GraduationCap className="h-4 w-4 text-[#d29a27] dark:text-amber-400 shrink-0" />
-            <span className="text-[10px] font-bold">50+ Universities</span>
-          </div>
-
-          {/* Mobile & Tablet Responsive Stat Badges Strip */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:hidden w-full max-w-[460px] z-20">
-            <div className="flex items-center gap-2 rounded-xl border border-[#102f53]/10 dark:border-white/15 bg-white/95 dark:bg-[#0b2542]/90 px-3 py-2 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#168f8a]/15 text-[#137a77] dark:bg-[#168f8a]/25 dark:text-[#5ed2c2] shrink-0">
-                <BookOpen className="h-4 w-4" />
+          {/* Bottom Stat Pill — Resting Safely Below Video Frame (ZERO OVERLAP) */}
+          <div className="w-full flex items-center justify-end mt-3 z-20 px-1 sm:px-2">
+            <div className="inline-flex items-center gap-2 rounded-2xl border border-[#d29a27]/30 bg-white/95 dark:bg-[#0b2542]/95 px-3.5 py-1.5 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white transition-all hover:scale-105">
+              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#d29a27]/15 text-[#9d7115] dark:bg-[#d29a27]/20 dark:text-[#f5d778] shrink-0">
+                <Zap className="h-3.5 w-3.5" />
               </span>
               <div className="text-left">
-                <strong className="block text-xs font-bold leading-tight">10,000+ Reports</strong>
-                <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6] leading-tight">Verified Academic</small>
+                <strong className="block text-[11px] sm:text-xs font-bold leading-tight">Instant Downloads</strong>
+                <small className="text-[9px] sm:text-[10px] text-[#516273] dark:text-[#b8c7d6] leading-none">Lifetime Digital Access</small>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2 rounded-xl border border-[#d29a27]/30 dark:border-[#f5d778]/25 bg-white/95 dark:bg-[#0b2542]/90 px-3 py-2 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#d29a27]/15 text-[#9d7115] dark:bg-[#d29a27]/20 dark:text-[#f5d778] shrink-0">
-                <Zap className="h-4 w-4" />
-              </span>
-              <div className="text-left">
-                <strong className="block text-xs font-bold leading-tight">Instant Access</strong>
-                <small className="text-[10px] text-[#516273] dark:text-[#b8c7d6] leading-tight">Lifetime Downloads</small>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-1.5 rounded-xl border border-amber-400/35 bg-white/95 dark:bg-[#071b31]/90 px-3 py-2 shadow-sm backdrop-blur-md text-[#102f53] dark:text-white">
-              <GraduationCap className="h-4 w-4 text-[#d29a27] dark:text-amber-400 shrink-0" />
-              <span className="text-xs font-bold">50+ Universities</span>
             </div>
           </div>
         </div>

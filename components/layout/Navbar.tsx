@@ -221,14 +221,14 @@ export function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
             ? 'bg-white/95 dark:bg-[#071b31]/95 backdrop-blur-md shadow-md border-b border-gray-100 dark:border-white/10 py-1' 
-            : 'bg-[#FAF9F7]/90 dark:bg-[#071b31]/90 backdrop-blur-sm border-b border-[rgba(190,200,202,0.2)] dark:border-white/10 py-2 sm:py-2.5'
+            : 'bg-[#FAF9F7]/90 dark:bg-[#071b31]/90 backdrop-blur-sm border-b border-[rgba(190,200,202,0.2)] dark:border-white/10 py-1.5 sm:py-2'
         }`}
       >
-        {/* Top bar */}
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3 sm:gap-6">
+        {/* Top bar — Ultra-Responsive Layout with Zero Horizontal Overflow */}
+        <div className="max-w-[1400px] w-full mx-auto px-3 sm:px-5 lg:px-6 h-14 sm:h-16 flex items-center justify-between gap-1.5 sm:gap-2 lg:gap-3">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group">
-            <span className="relative h-9 w-9 sm:h-11 sm:w-11 rounded-xl overflow-hidden border-2 border-[#d29a27]/80 bg-white p-0.5 shadow-md shadow-[#d29a27]/15 group-hover:scale-105 group-hover:border-[#d29a27] transition-all duration-300">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group mr-1 lg:mr-2">
+            <span className="relative h-8 w-8 sm:h-10 sm:w-10 rounded-xl overflow-hidden border-2 border-[#d29a27]/80 bg-white p-0.5 shadow-md shadow-[#d29a27]/15 group-hover:scale-105 group-hover:border-[#d29a27] transition-all duration-300">
               <Image
                 src="/karya-saarthi-logo.jpg"
                 alt="Karya Saarthi Logo"
@@ -239,22 +239,22 @@ export function Navbar() {
               />
             </span>
             <div className="flex flex-col">
-              <span className="font-display text-lg sm:text-xl font-extrabold text-[#102f53] dark:text-white tracking-tight group-hover:text-[#168f8a] transition-colors leading-none" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
+              <span className="font-display text-base sm:text-lg lg:text-xl font-extrabold text-[#102f53] dark:text-white tracking-tight group-hover:text-[#168f8a] transition-colors leading-none" style={{ fontFamily: 'var(--font-epilogue)', letterSpacing: '-0.04em' }}>
                 KSHub
               </span>
-              <span className="text-[8px] sm:text-[9px] uppercase tracking-wider font-bold text-[#d29a27] mt-0.5 font-mono">
+              <span className="text-[7.5px] sm:text-[8.5px] uppercase tracking-wider font-bold text-[#d29a27] mt-0.5 font-mono">
                 By Karya Saarthi
               </span>
             </div>
           </Link>
 
-          {/* Mega-menu nav — desktop (All categories in BOLD as requested) */}
-          <div className="hidden lg:flex items-center gap-1" onMouseLeave={handleMouseLeave}>
+          {/* Mega-menu nav — desktop (All categories in BOLD as requested, with compact responsive padding) */}
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 shrink-0" onMouseLeave={handleMouseLeave}>
             {PARENT_CATEGORIES.map((parent) => (
               <button
                 key={parent.name}
                 onMouseEnter={() => handleMouseEnter(parent.name)}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[13px] font-bold tracking-tight transition-all whitespace-nowrap cursor-pointer ${
+                className={`flex items-center gap-1 px-2 xl:px-3 py-1.5 rounded-xl text-xs xl:text-[13px] font-bold tracking-tight transition-all whitespace-nowrap cursor-pointer ${
                   activeMenu === parent.name
                     ? 'bg-[#102f53] text-[#f5d778] dark:bg-white/15 dark:text-[#f5d778] shadow-sm'
                     : 'text-[#102f53] dark:text-white hover:text-[#168f8a] dark:hover:text-[#5ed2c2] hover:bg-[#168f8a]/10 dark:hover:bg-white/10'
@@ -262,12 +262,12 @@ export function Navbar() {
                 style={{ fontFamily: 'var(--font-manrope)' }}
               >
                 <span>{parent.name}</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeMenu === parent.name ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 ${activeMenu === parent.name ? 'rotate-180' : ''}`} />
               </button>
             ))}
             <Link
               href="/search"
-              className="flex items-center gap-1 px-3.5 py-2 rounded-xl text-[13px] font-bold tracking-tight text-[#102f53] dark:text-white hover:text-[#168f8a] dark:hover:text-[#5ed2c2] hover:bg-[#168f8a]/10 dark:hover:bg-white/10 transition-all whitespace-nowrap"
+              className="flex items-center gap-1 px-2 xl:px-3 py-1.5 rounded-xl text-xs xl:text-[13px] font-bold tracking-tight text-[#102f53] dark:text-white hover:text-[#168f8a] dark:hover:text-[#5ed2c2] hover:bg-[#168f8a]/10 dark:hover:bg-white/10 transition-all whitespace-nowrap"
               style={{ fontFamily: 'var(--font-manrope)' }}
             >
               All Documents
@@ -349,54 +349,57 @@ export function Navbar() {
           </div>
 
           {/* Spacer */}
-          <div className="flex-1" />
+          <div className="flex-1 min-w-[8px]" />
 
-          {/* Search icon — all screens */}
-          <button
-            onClick={() => setSearchOpen(true)}
-            className="flex p-2 sm:p-2.5 rounded-xl hover:bg-[#EFEEEC] dark:hover:bg-white/10 transition-colors text-[#3F484A] dark:text-[#c2d1df]"
-            aria-label="Open search"
-          >
-            <Search className="w-4 h-4" />
-          </button>
+          {/* Right Action Controls Group — Seamless Responsive Sizing with ZERO Clipping */}
+          <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-2.5 shrink-0">
+            {/* Search icon — all screens */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="p-1.5 sm:p-2 rounded-xl hover:bg-[#EFEEEC] dark:hover:bg-white/10 transition-colors text-[#3F484A] dark:text-[#c2d1df] shrink-0"
+              aria-label="Open search"
+            >
+              <Search className="w-4 h-4" />
+            </button>
 
-          {/* Theme Toggle Button (Light / Dark Mode) */}
-          <ThemeToggle />
+            {/* Theme Toggle Button (Light / Dark Mode Dual-Segment Switcher) */}
+            <ThemeToggle className="shrink-0" />
 
-          {/* Upload Button — Dedicated Light & Dark Theme Styling with Click Color Shift */}
-          <Link
-            href="/upload"
-            className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer whitespace-nowrap shadow-sm
-              bg-gradient-to-r from-[#168f8a] to-[#127773] text-white hover:from-[#137a77] hover:to-[#0f6460] shadow-[#168f8a]/25 active:from-[#0d5552] active:to-[#093c3a] active:scale-95 active:ring-2 active:ring-[#d29a27]/50
-              dark:from-[#168f8a] dark:to-[#0f6460] dark:border dark:border-[#5ed2c2]/50 dark:shadow-[0_0_16px_rgba(94,210,194,0.3)] dark:hover:from-[#1ab3ad] dark:hover:to-[#168f8a] dark:hover:shadow-[0_0_22px_rgba(94,210,194,0.5)] dark:active:from-[#0b4745] dark:active:to-[#072f2e]"
-            style={{ fontFamily: 'var(--font-manrope)' }}
-          >
-            <Upload className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span>Upload</span>
-          </Link>
+            {/* Upload Button — Dedicated Light & Dark Theme Styling with Click Color Shift */}
+            <Link
+              href="/upload"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 xl:px-4 py-1.5 xl:py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap shadow-sm shrink-0
+                bg-gradient-to-r from-[#168f8a] to-[#127773] text-white hover:from-[#137a77] hover:to-[#0f6460] shadow-[#168f8a]/25 active:from-[#0d5552] active:to-[#093c3a] active:scale-95 active:ring-2 active:ring-[#d29a27]/50
+                dark:from-[#168f8a] dark:to-[#0f6460] dark:border dark:border-[#5ed2c2]/50 dark:shadow-[0_0_16px_rgba(94,210,194,0.3)] dark:hover:from-[#1ab3ad] dark:hover:to-[#168f8a] dark:hover:shadow-[0_0_22px_rgba(94,210,194,0.5)] dark:active:from-[#0b4745] dark:active:to-[#072f2e]"
+              style={{ fontFamily: 'var(--font-manrope)' }}
+            >
+              <Upload className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>Upload</span>
+            </Link>
 
-          {/* Auth buttons */}
-          {!profile ? (
-            <div className="hidden md:flex items-center gap-2.5">
-              {/* Log in Button — Dedicated Light & Dark Theme Styling with Click Color Shift */}
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border-2 text-xs sm:text-sm font-bold shadow-2xs transition-all duration-200 cursor-pointer whitespace-nowrap hover:scale-105 active:scale-95
-                  border-[#102f53]/25 bg-white/95 text-[#102f53] hover:border-[#102f53] hover:bg-[#102f53] hover:text-white active:bg-[#168f8a] active:border-[#168f8a] active:text-white active:ring-2 active:ring-[#d29a27]/40
-                  dark:border-white/25 dark:bg-white/10 dark:text-white dark:hover:border-white dark:hover:bg-white dark:hover:text-[#071b31] dark:active:bg-[#f5d778] dark:active:border-[#f5d778] dark:active:text-[#071b31]"
-                style={{ fontFamily: 'var(--font-manrope)' }}
-              >
-                <User className="w-3.5 h-3.5 stroke-[2.5]" />
-                <span>Log in</span>
-              </Link>
-              <Link
-                href="/signup"
-                className="btn-primary !py-2 !px-5 !text-xs sm:!text-sm !font-bold whitespace-nowrap hover:scale-105 active:scale-95 transition-all duration-200 shadow-md shadow-[#d29a27]/25 dark:shadow-[0_0_18px_rgba(245,215,120,0.35)]"
-              >
-                Start Free Trial
-              </Link>
-            </div>
-          ) : (
+            {/* Auth buttons */}
+            {!profile ? (
+              <div className="hidden md:flex items-center gap-1.5 xl:gap-2 shrink-0">
+                {/* Log in Button — Dedicated Light & Dark Theme Styling with Click Color Shift */}
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-1.5 px-3 xl:px-3.5 py-1.5 xl:py-2 rounded-full border-2 text-xs font-bold shadow-2xs transition-all duration-200 cursor-pointer whitespace-nowrap hover:scale-105 active:scale-95 shrink-0
+                    border-[#102f53]/25 bg-white/95 text-[#102f53] hover:border-[#102f53] hover:bg-[#102f53] hover:text-white active:bg-[#168f8a] active:border-[#168f8a] active:text-white active:ring-2 active:ring-[#d29a27]/40
+                    dark:border-white/25 dark:bg-white/10 dark:text-white dark:hover:border-white dark:hover:bg-white dark:hover:text-[#071b31] dark:active:bg-[#f5d778] dark:active:border-[#f5d778] dark:active:text-[#071b31]"
+                  style={{ fontFamily: 'var(--font-manrope)' }}
+                >
+                  <User className="w-3.5 h-3.5 stroke-[2.5]" />
+                  <span>Log in</span>
+                </Link>
+                <Link
+                  href="/signup"
+                  className="btn-primary !py-1.5 xl:!py-2 !px-3 xl:!px-4.5 !text-xs !font-bold whitespace-nowrap hover:scale-105 active:scale-95 transition-all duration-200 shadow-md shadow-[#d29a27]/25 dark:shadow-[0_0_18px_rgba(245,215,120,0.35)] shrink-0"
+                >
+                  <span className="hidden xl:inline">Start Free Trial</span>
+                  <span className="xl:hidden">Free Trial</span>
+                </Link>
+              </div>
+            ) : (
             <div className="hidden md:flex items-center gap-2 relative" ref={menuRef}>
               {isPremium && (
                 <span className="flex items-center gap-1 px-2.5 py-1 bg-amber-50 rounded-full text-xs font-semibold text-amber-700">
@@ -464,6 +467,7 @@ export function Navbar() {
               )}
             </div>
           )}
+          </div>
 
           {/* Mobile menu toggle */}
           <button
